@@ -1,0 +1,103 @@
+{% load static %}
+{% comment %} {% load cart_tag %} {% endcomment %}
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>سبد خرید</title>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
+        </head>
+        {% for message in messages %}
+        <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+        </div>
+        </div>
+        {% endfor %}
+        <body style="background: rgb(204, 106, 57);">
+            <div class="container main-section">
+                <div class="row">
+                    <div class="col-lg-12 pb-2">
+                        <h4  style="text-align:right;">سبد خرید</h4>
+                    </div>
+                    <div class="col-lg-12 pl-3 pt-3">
+                        <table class="table table-hover bg-light">
+                            <thead>
+                                  <tr>
+                                    <th>محصول</th>
+                                    <th>قیمت</th>
+                                    <th>درصد تخفیف</th>
+                                    <th style="width:10%;">تعداد</th>
+                                    <th>قیمت نهایی</th>
+                                   
+                                  </tr>
+                            </thead>
+                            <tbody>
+                                {% for order_item in object.items.all %}
+                                  <tr>
+                                    <td style="width:50%">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-2 mb-2 mb-md-0 Product-img">
+                                                <img src="{{order_item.item.image.url}}" alt="..." class="img-responsive"/>
+                                            </div>
+                                            <div class="col-lg-10">
+                                                <h4 class="nomargin">کتاب {{ order_item.item.name }}</h4>
+                                                <p>{{ order_item.item.author }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td> {{ order_item.item.price }} </td>
+                                    <td> {{ order_item.item.percent }} </td>
+                                    <td data-th="Quantity">
+                                        {% comment %} <input type="number" class="form-control text-center" value="{{value.quantity}}"> {% endcomment %}
+                                        <a href="{% url 'gallery:item_increment' order_item.item.id %}" style="margin:8px; color: black">+</a>
+                                        {{ order_item.quantity }}
+                                        {% if order_item.quantity > 1 %}
+                                        <a href="{% url 'gallery:item_decrement' order_item.item.id %}" style="margin:8px; color:black">-</button></a>
+                                        {% endif %}
+                                        <a href="{% url 'gallery:item_clear' order_item.item.id %}" style="margin:8px; color:red">حذف</button></a>
+                                        
+                                    </td>
+                                    <td>{{ order_item.get_final_price }}</td>
+                                    
+                                  </tr>
+                                {% endfor %}
+
+
+
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><a href="{% url 'gallery:index' %}" class="btn btn-warning text-white"><i class="fa fa-angle-left"></i> ادامه خرید</a></td>
+                                    <td colspan="2" class="hidden-xs"><strong>قیمت کل:{{ object.get_total }} </strong></td>
+                                    
+
+                                    <td class="hidden-xs text-center" style="width:10%;">
+                                    {% if object.get_total > 0 %}
+                                        <form method="POST" id="cart_form" action="{% url 'gallery:request' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="cart_id" id="cart_id" value="{{ object.pk }}">
+
+                                            <button type="submit" class="btn btn-success btn-block">انتقال به درگاه <i class="fa fa-angle-right"></i></button></td>
+                                        </form>
+                                    {% endif %}
+                                </tr>
+                            </tfoot>
+                            {% comment %} <a href="{% url 'gallery:cart_detail' %}">clear all</a> {% endcomment %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <script src="{% static 'js/jquery.min.js' %}"></script>
+            <script src="{% static 'js/bootstrap.js' %}"></script>
+        </body>
+        </html>
+        

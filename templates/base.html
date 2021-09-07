@@ -1,0 +1,206 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block headstylescript %}{% endblock %}
+    <title>{% block title %}فروشگاه کتاب آنلاین{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
+
+  </head>
+
+  <body style="background-color:rgb(238, 234, 234);">
+
+    <header>
+      <!-- Grid container -->
+
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+         <p id="title"><img  src="{% static 'img/header.png' %}"></p>
+        <!--Grid row-->
+        <h4 class="h4-text">:)خرید آنلاین از فروشگاه ما</h4>
+      </div>
+
+        </header>
+        <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'gallery:index' %}">صفحه اصلی <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'gallery:shoppingcart' %}">سبد خرید</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 ورود/ثبت نام/خروج
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if user.is_authenticated %}
+                   <a class="dropdown-item" href="{% url 'gallery:logout' %}">خروج</a>
+                   <a class="dropdown-item" href="{% url 'gallery:history' %}">تاریخچه خرید</a>
+                {% else %}
+                  <a class="dropdown-item" href="{% url 'gallery:login' %}">ورود</a>
+                  <a class="dropdown-item" href="{% url 'gallery:register' %}">ثبت نام</a>
+                {% endif %}
+              </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'gallery:search_results' %}" method="get">
+              <input class="form-control ml-sm-2 " type="search" name="search" id="search" placeholder="" aria-label="Search"  style="border:1px solid red;text-align:right;">
+              <button class="btn btn-outline-danger" type="submit">جستجو</button>
+            </form>
+          </div>
+        </nav>
+
+{% for message in messages %}
+<div class="container-fluid p-0">
+  <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+</div>
+{% endfor %}
+    {% block main %}
+
+    {% endblock %}
+
+
+
+    <footer style=" background-color: rgb(204, 106, 57);">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+
+
+          <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <ul class="phone_email">
+              <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
+              <br>
+              <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a style="color:black;" href="mailto:store@grocery.com">store@Bookism.com</a></li>
+            </ul>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">لینک ها</h5>
+
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="www.gmail.com" class="text-dark">ارتباط با ما</a>
+              </li>
+              <li>
+                <a href="rahnama" class="text-dark">راهنما</a>
+              </li>
+              <li>
+                <a href="about" class="text-dark">درباره ما</a>
+              </li>
+
+            </ul>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2020 Copyright:
+        <a class="text-dark" href="https://mdbootstrap.com/">**********</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    
+    
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/clean.js' %}"></script>
+    <script src="{% static 'js/slick/slick.min.js' %}"></script>
+    <script src="{% static 'js/bsAlerts/jquery.bsAlerts.min.js' %}"></script>
+   <script>
+function topFunction() {
+        // window.requestAnimationFrame(topFunction);
+        // window.scrollTo(0, document.documentElement.scrollTop - document.documentElement.scrollTop / 10);
+        
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        // window.webkitRequestAnimationFrame(topFunction);
+    }
+function show_alert_message(msg, prort) {
+  topFunction();
+  console.log(msg)
+  $("#ele").trigger("add-alerts", [
+    {
+      "message": msg,
+      "priority": prort
+    }
+  ]);
+}
+ $(document).ready(function () {
+   $('.slider').slick({
+    infinite: true,
+    speed: 300,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+        {
+            breakpoint: 1696,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true
+
+            }
+        },
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true
+
+            }
+        },
+        {
+            breakpoint: 600,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 400,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+
+    ]
+});
+});
+{% block script %}
+
+
+{% endblock %}
+</script>
+
+</body>
+</html>
