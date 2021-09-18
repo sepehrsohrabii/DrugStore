@@ -1,0 +1,147 @@
+﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+body {
+	font-family: IRANSans !important;
+	font-weight: 400;
+	direction: rtl;
+	font-size: 12px !important;
+	font-style: normal;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6,input, textarea {
+	font-family: IRANSans !important;
+}
+h1 {
+	font-weight: 500;
+	font-size: 32px;	
+  line-height: 1.5;
+}
+h4 {
+  font-size: 16px;
+  line-height: 2;
+  font-weight: 500;
+}
+h4.subtitle{
+  color: #808080;
+  font-weight: 400;
+}
+
+.container{
+    max-width: 1040px;
+}
+
+.Logo {
+    width: 135.6px;
+    height: 41px;
+    
+  }
+.Search {
+    width: 512px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    
+    padding: 12px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+}
+img.IconlyTwo-toneSearch {
+    width: 24px;
+    height: 24px;
+    
+    flex-grow: 0;
+    object-fit: contain;
+  }
+  .mdc-text-field--with-trailing-icon{
+      padding-left: 12px !important;
+  }
+  .Acount---Basket {
+    width: 180px;
+    height: 33px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    
+    padding: 0;
+  }
+.welcome-name {
+    width: 98px;
+    
+    flex-grow: 0;
+    
+    letter-spacing: normal;
+    text-align: right;
+    color: #000;
+  }
+  .mdc-floating-label{
+	  font-family: IRANSans;
+  }
+  .Vector-1 {
+	width: 1px;
+	height: 32px;
+	flex-grow: 0;
+	background-color: #002c31;
+  }
+  .mt-65{
+	  margin-top: 65px;
+  }
+  .mb-43{
+	margin-bottom: 43px;
+}
+.Categories {
+	width: 160px;
+	height: 40px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	border-radius: 8px 8px 0px 0px;
+	font-weight: 500;
+	
+	
+	
+	line-height: 170%;
+	padding: 8px 8px 8px 0px;
+	background-color: #ececec;
+	
+  }
+  .container{
+	  padding-right: 0px;
+	  padding-left: 0px;
+  }
+
+  .nav-link{
+	color: #808080 !important;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+  }
+  .custom-nav-1{
+	  color: #418287 !important;
+	  padding-right: 5px;
+    font-weight: 500;
+  }
+  .banner{
+	background: #ECECEC;
+	border-radius: 8px 0px 8px 8px;
+	height: 512px;
+  }
+  .banner-first-row{
+	  height: 392.5px;
+  }
+  .custom-button-1{
+    
+    border-radius: 8px;
+    border: solid 1px #418287;
+    font-size: 14px;
+    font-weight: 500;
+    color: #002c31;
+    width: 132px;
+    height: 40px;
+    align-items: center;
+  }
