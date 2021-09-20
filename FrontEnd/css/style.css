@@ -1,4 +1,25 @@
 ﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
+:root {
+  --primary: #06555A;
+  --primary-light: #418287;
+  --primary-dark: #002C31;
+  --secondary: #F29796;
+  --secondary-light: #FADAD9;
+  --secondary-dark: #DB4D4C;
+  --background: #F5F8FD;
+  --error: #FF4949;
+  --accept: #31F072;
+  --black: #000000;
+  --dark-gray: #4D4D4D;
+  --gray: #808080;
+  --light-gray: #B2B2B2;
+  --white: #FFFFFF;
+  --box: #F2F2F2;
+  --banner: #F2F2F2;
+  --primary-light-2: #EBF1F1;
+  --secondary-light-2: #FDEEEE;
+}
 body {
 	font-family: IRANSans !important;
 	font-weight: 400;
@@ -15,14 +36,29 @@ h1 {
 	font-size: 32px;	
   line-height: 1.5;
 }
+h3 {
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: 700;
+}
 h4 {
   font-size: 16px;
   line-height: 2;
   font-weight: 500;
 }
 h4.subtitle{
-  color: #808080;
+  color: var(--gray);
   font-weight: 400;
+}
+h5 {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+p {
+  font-size: 12px;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
 .container{
@@ -87,7 +123,7 @@ img.IconlyTwo-toneSearch {
 	background-color: #002c31;
   }
   .mt-65{
-	  margin-top: 65px;
+	  margin-top: 65px !important;
   }
   .mb-43{
 	margin-bottom: 43px;
@@ -102,13 +138,9 @@ img.IconlyTwo-toneSearch {
 	gap: 10px;
 	border-radius: 8px 8px 0px 0px;
 	font-weight: 500;
-	
-	
-	
 	line-height: 170%;
 	padding: 8px 8px 8px 0px;
-	background-color: #ececec;
-	
+	background-color: var(--secondary-light-2);
   }
   .container{
 	  padding-right: 0px;
@@ -127,7 +159,7 @@ img.IconlyTwo-toneSearch {
     font-weight: 500;
   }
   .banner{
-	background: #ECECEC;
+	background: var(--secondary-light-2);
 	border-radius: 8px 0px 8px 8px;
 	height: 512px;
   }
@@ -135,7 +167,6 @@ img.IconlyTwo-toneSearch {
 	  height: 392.5px;
   }
   .custom-button-1{
-    
     border-radius: 8px;
     border: solid 1px #418287;
     font-size: 14px;
@@ -144,6 +175,29 @@ img.IconlyTwo-toneSearch {
     width: 132px;
     height: 40px;
     align-items: center;
+    background: none;
+  }
+  .custom-button-2{
+    border-radius: 8px;
+    border: none;
+    font-size: 12px;
+    font-weight: 400;
+    color: #002c31;
+    width: 64px;
+    height: 28px;
+    align-items: center;
+    background-color: #EBF1F1;
+  }
+  .custom-button-3{
+    border-radius: 8px;
+    border: solid 1px #F5F8FD;
+    font-size: 12px;
+    font-weight: 400;
+    width: 64px;
+    height: 28px;
+    align-items: center;
+    background: none;
+    color: #F5F8FD;
   }
 
   .custom-line-1 {
@@ -151,9 +205,71 @@ img.IconlyTwo-toneSearch {
     height: 0.5px;
     background-color: #000;
   }
+  .custom-line-2 {
+    border-radius: 8px;
+    height: 2.5px;
+    background-color: #418287;
+  }
   .mdc-floating-label{
     font-size: 12px;
   }
   .mdc-line-ripple::before{
     border-bottom: none;
+  }
+
+  .custom-box-1{
+    width: 23.3%;
+    height: 138px;
+    border-radius: 8px;
+    
+  }
+  .custom-box-2{
+    width: 23.3%;
+    height: 138px;
+    border-radius: 8px;
+    color: #FADAD9;
+  }
+  .custom-box-3{
+    width: 48.8%;
+    height: 138px;
+    border-radius: 8px;
+  }
+  .slick-slide img {
+    display: unset !important;
+  }
+  .custom-carousel{
+    border: none;
+    background: none;
+  }
+
+  .pre-footer{
+    margin-bottom: 60px;
+  }
+  .footer{
+    background-color: #F5F8FD;
+    margin-bottom: 62px;
+  }
+  .footer-one{
+    margin: 40px !important;
+    margin-bottom: 77px !important;
+  }
+  .footer-tow{
+    margin: 40px !important;
+
+  }
+  .about-us{
+    margin-right: 50px !important;
+  }
+  #myBtn {
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background: none;
+    padding: 15px; /* Some padding */
+    font-size: 12px; /* Increase font size */
+  }
+  .blog{
+    margin-bottom: 40px;
+  }
+  .card-body{
+    margin-bottom: 17px;
   }
