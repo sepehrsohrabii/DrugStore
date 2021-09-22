@@ -55,10 +55,15 @@ h5 {
   line-height: 1.4;
   font-weight: 500;
 }
-p {
+h6 {
   font-size: 12px;
+  font-weight: 500;
   line-height: 1.7;
-  font-weight: 300;
+}
+p {
+  font-size: 10px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .container{
@@ -273,3 +278,21 @@ img.IconlyTwo-toneSearch {
   .card-body{
     margin-bottom: 17px;
   }
+  .product-card {
+    width: 192px;
+    height: 264px;
+    
+    border-radius: 8px;
+    border: none;
+    background-color: #fff;
+  }
+  .product-card:hover{
+    transform: scale(1.01);
+    box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.05);
+  }
+  .product-card-img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  
+  
