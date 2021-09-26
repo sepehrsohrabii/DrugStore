@@ -1,4 +1,5 @@
-﻿@import url(fontiran.css); /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+﻿@import url('../dist/css/style.css'); /* آیکون ها */
+@import url(fontiran.css); /* فونت ایران سنس */
 
 :root {
   --primary: #06555A;
@@ -27,6 +28,8 @@ body {
 	font-size: 12px !important;
 	font-style: normal;
 	margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 h1, h2, h3, h4, h5, h6,input, textarea {
 	font-family: IRANSans !important;
@@ -35,6 +38,11 @@ h1 {
 	font-weight: 500;
 	font-size: 32px;	
   line-height: 1.5;
+}
+h2 {
+	font-size: 24px;
+  font-weight: 500;	
+  line-height: 1.45;
 }
 h3 {
   font-size: 18px;
@@ -99,8 +107,6 @@ img.IconlyTwo-toneSearch {
       padding-left: 12px !important;
   }
   .Acount---Basket {
-    width: 180px;
-    height: 33px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -215,6 +221,14 @@ img.IconlyTwo-toneSearch {
     height: 2.5px;
     background-color: #418287;
   }
+  .custom-line-3 {
+    border-radius: 8px;
+    width: 147.5px;
+    height: 0.5px;
+    background-color: var(--gray);
+    position: absolute;
+    
+  }
   .mdc-floating-label{
     font-size: 12px;
   }
@@ -239,6 +253,13 @@ img.IconlyTwo-toneSearch {
     height: 138px;
     border-radius: 8px;
   }
+  .custom-box-4{
+    width: 48.46%;
+    height: 128px;
+    border-radius: 8px;
+    color: var(--white);
+    padding: 25px 40px 0px 40px;
+  }
   .slick-slide img {
     display: unset !important;
   }
@@ -251,7 +272,9 @@ img.IconlyTwo-toneSearch {
     margin-bottom: 60px;
   }
   .footer{
-    background-color: #F5F8FD;
+    background-color: var(--background);
+    border-radius: 8px;
+    padding: 49px 40px 41px 39px;
     margin-bottom: 62px;
   }
   .footer-one{
@@ -262,8 +285,17 @@ img.IconlyTwo-toneSearch {
     margin: 40px !important;
 
   }
-  .about-us{
-    margin-right: 50px !important;
+  .footer-links {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--gray);
+  }
+  .footer-about {
+    color: var(--gray);
+    line-height: 2;
+  }
+  .footer-share {
+    color: var(--primary-dark);
   }
   #myBtn {
     border: none; /* Remove borders */
@@ -275,24 +307,133 @@ img.IconlyTwo-toneSearch {
   .blog{
     margin-bottom: 40px;
   }
-  .card-body{
-    margin-bottom: 17px;
-  }
   .product-card {
     width: 192px;
     height: 264px;
-    
+    padding-left: 25px;
+    padding-right: 25px;
     border-radius: 8px;
     border: none;
     background-color: #fff;
+    transition-duration: 0.15s;
+  }
+  .product-card-2 {
+    height: 280px;
   }
   .product-card:hover{
-    transform: scale(1.01);
+    transform: scale(1.05);
     box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.05);
   }
   .product-card-img {
     width: 120px !important;
     height: 120px !important;
   }
+  .product-card-detail{
+    width: 123px;
+    height: 108px;
+  }
+  .product-card-button{
+    width: 36.27px;
+    height: 24px;
+    background: var(--primary-light);
+    border-radius: 8px;
+    border: none;
+    color: var(--white);
+    padding: 6px 12px;
+  }
+  .product-card-takhfif {
+    width: 22px;
+    height: 15px;
+    background: rgba(255, 73, 73, 0.15);
+    /* Error */
+    display: inline;
+    border: 0.5px solid var(--error);
+    color: var(--error);
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 0 4px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+  .product-card-takhfif-row {
+    height: 19px;
+  }
+  .takhfif-price {
+    font-size: 12px;
+    font-weight: normal;
+    text-decoration-line: line-through;
+    color: var(--gray);
+  }
   
-  
+  .card-sharing {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    position: absolute;
+    width: 24px;
+    height: 64px;
+    left: 16px;
+    top: 16px;
+    font-size: 25px;
+    color: var(--primary-light);
+  }
+  .blog-sharing {
+    font-size: 25px;
+    color: var(--primary-light);
+  }
+
+  .offer-box {
+    height: 370px;
+    background: url(../img/488788f3fd277f96f22f27ba5d11d75b.jfif);
+    border-radius: 8px;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .slick-slide {
+    margin: 0 8px;
+  }
+  /* the parent */
+  .offer-timer {
+    color: var(--gray);
+    display: flex;
+    vertical-align: middle;
+  }
+
+  .brands img{
+    object-fit: contain;
+    max-width: 180px;
+    max-height: 40px;
+  }
+
+  .bala{
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background: none;
+    margin-top: 6px;
+  }
+  .blog-card{
+    background-color: var(--background);
+    border-radius: 8px;
+    width: 331px;
+    flex: unset;
+  }
+  .blog-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .blog-text{
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gray);
+    display: inline;
+    line-height: 1.6;
+  }
+
+  .pre-footer-address{
+    color: var(--gray);
+  }
