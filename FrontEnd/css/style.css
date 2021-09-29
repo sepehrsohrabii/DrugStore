@@ -139,7 +139,7 @@ img.IconlyTwo-toneSearch {
   .mb-43{
 	margin-bottom: 43px;
 }
-.Categories {
+.categories_button {
 	width: 160px;
 	height: 40px;
 	display: flex;
@@ -152,6 +152,21 @@ img.IconlyTwo-toneSearch {
 	line-height: 170%;
 	padding: 8px 8px 8px 0px;
 	background-color: var(--secondary-light-2);
+  border: none;
+  }
+  .dropdown-menu{
+    width: 1040px;
+    height: 393px;
+    font-size: 1rem;
+    background: var(--background);
+    box-shadow: 8px 10px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 0px 0px 8px 8px;
+    color: #212529;
+    text-align: right;
+    list-style: none;
+    transform: translate(-866px, 40px) !important;
+    background-clip: padding-box;
+    border: none;
   }
   .container{
 	  padding-right: 0px;
