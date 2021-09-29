@@ -2,67 +2,90 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="fa" dir="rtl">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block headstylescript %}{% endblock %}
-    <title>{% block title %}فروشگاه کتاب آنلاین{% endblock %}</title>
+    <title>{% block title %}داروخانه دکتر ارجمند{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.rtl.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/material-components-web.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'js/slick/slick-theme.css' %}">
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/_reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'slick/slick/slick-theme.css' %}">
   </head>
 
-  <body style="background-color:rgb(238, 234, 234);">
+  <body>
 
-    <header>
-      <!-- Grid container -->
-
-      <div class="container p-4">
-        <!--Grid row-->
-        <div class="row">
-         <p id="title"><img  src="{% static 'img/header.png' %}"></p>
-        <!--Grid row-->
-        <h4 class="h4-text">:)خرید آنلاین از فروشگاه ما</h4>
-      </div>
-
-        </header>
-        <nav dir="rtl" class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="{% url 'gallery:index' %}">صفحه اصلی <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery:shoppingcart' %}">سبد خرید</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 ورود/ثبت نام/خروج
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% if user.is_authenticated %}
-                   <a class="dropdown-item" href="{% url 'gallery:logout' %}">خروج</a>
-                   <a class="dropdown-item" href="{% url 'gallery:history' %}">تاریخچه خرید</a>
-                {% else %}
-                  <a class="dropdown-item" href="{% url 'gallery:login' %}">ورود</a>
-                  <a class="dropdown-item" href="{% url 'gallery:register' %}">ثبت نام</a>
-                {% endif %}
-              </li>
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0" action="{% url 'gallery:search_results' %}" method="get">
-              <input class="form-control ml-sm-2 " type="search" name="search" id="search" placeholder="" aria-label="Search"  style="border:1px solid red;text-align:right;">
-              <button class="btn btn-outline-danger" type="submit">جستجو</button>
-            </form>
+    <!-- Header -->
+    <header class="mt-65">
+      <div class="container mb-43">
+          <div class="row justify-content-between align-items-center">
+              <div class="col-2 align-self-center">
+                  <img src="{% static 'img/Group 7.png' %}">
+              </div>
+              <div class="col-7 align-self-center ps-5">
+                  <label class="Search mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon">
+                      <span class="mdc-text-field__ripple"></span>
+                      <span class="mdc-floating-label" id="my-label-id">جستجو</span>
+                      <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                      <img src="{% static './img/Iconly/Two-tone/Search.webp' %}" class="IconlyTwo-toneSearch">
+                      <span class="mdc-line-ripple"></span>
+                    </label>
+              </div>
+              <div class="col-3 text-left d-flex align-items-center justify-content-end">
+                  <div class="Acount---Basket">
+                      <span class="welcome-name">
+                          سلام، خوش آمدید
+                        </span>
+                        <img src="{% static 'img/Profile.png' %}" class="IconlyTwo-toneSearch">
+                        <div class="Vector-1"></div>
+                        <a href=""><img src="{% static 'img/Cart-header.png' %}" class="IconlyTwo-toneSearch"></a>
+                  </div>
+              </div>
           </div>
-        </nav>
+      </div>
+      <div class="container">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-2 align-self-center">
+              <div class="dropdown">
+                <button class="categories_button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="{% static 'img/categories-icon.png' %}" class="IconlyTwo-toneSearch">
+                        دسته بندی محصولات
+                </button>
+                <ul class="dropdown-menu" id="dropdown-categories" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </div>
+
+                
+            </div>
+            <div class="col-8 align-self-center">
+              <ul class="nav">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#">درباره داروخانه</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">مجله آنلاین</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link custom-nav-1" href="#">راهنمای خرید</a>
+                </li>
+                    </ul>
+            </div>
+            <div class="col-2 text-left d-flex align-items-center justify-content-end">
+                
+                  <img src="{% static 'img/Group 5.png' %}">
+                  <span class="nav-link custom-nav-1">
+                        دریافت نسخه دیجیتال
+                      </span>
+            </div>
+        </div>
+    </div>
+    </header>
 
 {% for message in messages %}
 <div class="container-fluid p-0">
@@ -80,127 +103,167 @@
 
 
 
-    <footer style=" background-color: rgb(204, 106, 57);">
-      <!-- Grid container -->
-      <div class="container p-4">
-        <!--Grid row-->
-        <div class="row">
-          <!--Grid column-->
-
-
-          <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-            <ul class="phone_email">
-              <li><i class="fa fa-phone" aria-hidden="true"></i>(+0123) 234 567</li>
-              <br>
-              <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a style="color:black;" href="mailto:store@grocery.com">store@Bookism.com</a></li>
-            </ul>
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase">لینک ها</h5>
-
-            <ul class="list-unstyled mb-0">
-              <li>
-                <a href="www.gmail.com" class="text-dark">ارتباط با ما</a>
-              </li>
-              <li>
-                <a href="rahnama" class="text-dark">راهنما</a>
-              </li>
-              <li>
-                <a href="about" class="text-dark">درباره ما</a>
-              </li>
-
-            </ul>
-          </div>
-          <!--Grid column-->
+    <!-- ارسال-مشاوره  -->
+    <div class="container pt-5" style="margin-bottom: 77.8px;">
+      <div class="row mb-3">
+        <div class="col text-center">
+          <img src="{% static 'img/111.png' %}" class="rounded mx-auto d-block mb-4" alt="...">
+          <h5>تضمین اصالت کالا</h5>
+          <p class="blog-text">اینجا فقط جنس اصل میفروشیم</p>
         </div>
-        <!--Grid row-->
+        <div class="col text-center">
+          <img src="{% static 'img/222.png' %}" class="rounded mx-auto d-block mb-4" alt="...">
+          <h5>ارسال به سراسر ایران</h5>
+          <p class="blog-text">ارسال در سریع ترین زمان ممکن</p>
+        </div>
+        <div class="col text-center">
+          <img src="{% static 'img/333.png' %}" class="rounded mx-auto d-block mb-4" alt="...">
+          <h5>قیمت مناسب</h5>
+          <p class="blog-text">میتونید مقایسه کنید!</p>
+        </div>
+        <div class="col text-center">
+          <img src="{% static 'img/444.png' %}" class="rounded mx-auto d-block mb-4" alt="...">
+          <h5>مشاوره تخصصی</h5>
+          <p class="blog-text">در هرکجا و هر زمان که هستید</p>
+        </div>
       </div>
-      <!-- Grid container -->
+    </div>
+                    
+    <!-- خط جداکننده  -->
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col custom-line-1"></div>
+      </div>
+    </div>
 
-      <!-- Copyright -->
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-dark" href="https://mdbootstrap.com/">**********</a>
+
+    <!-- pre footer -->
+    <div class="container pre-footer"  style="margin-top: 55px;">
+      <div class="row prefooter">
+      <div class="col-3 ps-5 align-self-center">
+        <img src="{% static 'img/logo-footer.png' %}" width="71px" , height="24px" alt="">
       </div>
-      <!-- Copyright -->
-    </footer>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    
-    
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-    <script src="{% static 'js/clean.js' %}"></script>
-    <script src="{% static 'js/slick/slick.min.js' %}"></script>
-    <script src="{% static 'js/bsAlerts/jquery.bsAlerts.min.js' %}"></script>
-   <script>
-function topFunction() {
-        // window.requestAnimationFrame(topFunction);
-        // window.scrollTo(0, document.documentElement.scrollTop - document.documentElement.scrollTop / 10);
+      
+      <div class="col-3 align-self-center pre-footer-address">
+        <h5>آدرس: تهران، خیابان سی تیر</h5>
         
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        // window.webkitRequestAnimationFrame(topFunction);
-    }
-function show_alert_message(msg, prort) {
-  topFunction();
-  console.log(msg)
-  $("#ele").trigger("add-alerts", [
-    {
-      "message": msg,
-      "priority": prort
-    }
-  ]);
-}
- $(document).ready(function () {
-   $('.slider').slick({
-    infinite: true,
-    speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-        {
-            breakpoint: 1696,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true
+      </div>
+      <div class="col-3 align-self-center pre-footer-address">
+        <h5>تماس داروخانه: ۰۲۱-۳۳۴۴۵۵</h5>
+      </div>
+      <div class="col">
+        
+      </div>
+      <div class="col-2 d-flex justify-content-center">
+        <button onclick="topFunction()" id="myBtn" title="">
+          بازگشت به بالا 
+          <i class="iconly-Arrow-Up-2 icli ps-2"></i>
+        </button>
+      </div>
+      </div>
+    </div>
+                    
+                    
+    <!-- footer -->
+    <footer class="container footer">
+      <div class="row">
+        <div class="col-2">
+          <ul class="nav flex-column">
+            <h6>داروخانه آنلاین</h6>
+            <li class="nav-item mt-3 mb-2"><a href="#" class="nav-link p-0 footer-links">فروشگاه محصولات</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">مجله آنلاین</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">نسخه دیجیتال</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">شیوه پرداخت</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-2">
+          <ul class="nav flex-column">
+            <h6>خدمات مشتریان</h6>
+            <li class="nav-item mt-3 mb-2"><a href="#" class="nav-link p-0 footer-links">راهنمای خرید</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">شرایط بازگشت محصول</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">سوالات متداول</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">حریم شخصی</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">گزارش مشکل</a></li>
+          </ul>
+        </div>
+  
+        <div class="col-2">
+          <ul class="nav flex-column">
+            <h6>داروخانه دکتر ارجمند</h6>
+            <li class="nav-item mt-3 mb-2"><a href="#" class="nav-link p-0 footer-links">شرایط همکاری</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">فرصت های شغلی</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">درباره ما</a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 footer-links">ارتباط با ما</a></li>
+          </ul>
+        </div>
+  
 
-            }
-        },
-        {
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true
+        <div class="col-6 ps-5">
+          <ul class="nav flex-column">
+            <h6>داروخانه دکتر ارجمند</h6><br>
+            <p class="footer-about">بسانم اب یدپوترا و یتشادهب و یشیارآ ربتعم تالوصحم یگدنیامن ندوب اراد .هدرک زاغآ ۱۴۰۰ لاس زا ار دوخ نیالنآ
+              زاغآ نارهت ریت یس نابایخ رد ۱۳۹۰ لاس زا ار دوخ تیلاعف دنمجرا رتکد هناخوراد هناخوراد یاه یگژیو زا اهتمیق نیرت
+              , یتشادهب یشیارآ تالوصحم دیرخ هرواشم ، یا هناخوراد و یتشادهب مزاول شورف روما رد هبرجت بسک اب و هدومن
+              طسوت ( یچیپ هخسن نیح رد ) ییوراد هرواشم نینچمه و ییاذغ یمیژر یاهلمکم و یکشزپ تازیهجت , یدپوترا
+              . دشاب یم  هناخوراد یروضح تامدخ رگید زا زاسوراد رتکد</p>
+          </ul>
+        </div>
+      </div>
+  
+      
+      <div class="row justify-content-between mt-5">
+        <div class="col-3 align-self-end">
+          <h6 class="footer-share">با ما در شبکه های اجتماعی همراه باشید</h6>
+            <ul class="nav flex-row mt-2">
+            <li class="nav-item"><a href="#" class="pe-3"><img src="{% static 'img/linkedin.png' %}" alt=""></a></li>
+            <li class="nav-item"><a href="#" class="pe-3"><img src="{% static 'img/twitter.png' %}" alt=""></a></li>
+            <li class="nav-item"><a href="#" class="pe-0"><img src="{% static 'img/instagram.png' %}" alt=""></a></li>
+          </ul>
+        </div>
 
-            }
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-            }
-        },
-        {
-            breakpoint: 400,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-            }
-        }
+        <div class="col-5">
+          <ul class="nav flex-row justify-content-end">
+            <li class="nav-item"><a href="#" class="me-3"><img src="{% static 'img/enamad.png' %}" width="80px" , height="80px" alt=""></a></li>
+            <li class="nav-item"><a href="#" class="me-3"><img src="{% static 'img/enamad2.png' %}" width="80px" , height="80px" alt=""></a></li>
+            <li class="nav-item"><a href="#" class="me-3"><img src="{% static 'img/enamad3.png' %}" width="80px" , height="80px" alt=""></a></li>
+            <li class="nav-item"><a href="#" class=""><img src="{% static 'img/enamad4.png' %}" width="80px" , height="80px" alt=""></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'js/material-components-web.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'slick/slick/slick.min.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+      function topFunction() {
+              // window.requestAnimationFrame(topFunction);
+              // window.scrollTo(0, document.documentElement.scrollTop - document.documentElement.scrollTop / 10);
+              
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+              // window.webkitRequestAnimationFrame(topFunction);
+          }
+      function show_alert_message(msg, prort) {
+        topFunction();
+        console.log(msg)
+        $("#ele").trigger("add-alerts", [
+          {
+            "message": msg,
+            "priority": prort
+          }
+        ]);
+      }
+      
+      });
+      {% block script %}
 
-    ]
-});
-});
-{% block script %}
 
-
-{% endblock %}
-</script>
+      {% endblock %}
+    </script>
 
 </body>
 </html>

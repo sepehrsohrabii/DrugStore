@@ -1,94 +1,1040 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-
-<section class="mainbody">
-
-
-
-
-    <!---********************mahsoolat*******-->
-
-
-
-       <!--Section: Block Content-->
-<section class="mahsoolat">
-  <h3 style="color:rgb(175, 12, 12);text-align: center;">دسته بندی محصولات</h3>
-  <br>
-  <!-- Grid row -->
-
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-md-12 mb-4">
-      <div class="slider container">
-      <!-- Card -->
-      {% for category in object_list %}
-      <div class="m-2">
-        <div class="view zoom overlay z-depth-2 rounded">
-          <a href="{% url 'gallery:books' category.slug %}">
-            <div class="mask">
-              <img class="img-fluid w-100" src="{{category.photo.url}}" alt="{{category.title}}" href="#">
-              <div class="mask rgba-black-slight"></div>
-            </div>
-          </a>
-        </div>
-        <div class="text-center pt-4">
-          <h5>{{category.title}}</h5>
-          <p class="mb-2 text-muted text-uppercase small">برای مشاهده کتاب های بیشتر کلیک کنید</p>
-          <hr>
-          <a href="{% url 'gallery:books' category.slug %}">
-          <button type="button" class="btn btn-outline-danger">مشاهده</button>
-          </a>
-        </div>
+<!-- banner -->
+<div class="container banner">
+  <div class="row justify-content-around align-items-center banner-first-row">
+    
+      <div class="col-4 align-items-center mx-5 px-5">
+        <h1>محصولات تخصصی
+        </br>
+        بهداشتی و آرایشی
+        </h1>
+        <h4 class="subtitle mt-1">ارسال رایگان به سراسر تهران</h4>
+        <button class="custom-button-1 mt-4">
+          <span>خرید محصول</span>
+          <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+        </button>
       </div>
-      {% endfor %}
-      
+      <div class="col-4">.g-col-4 .g-start-6</div>
+    
   </div>
+  <!-- banner line -->
+  <div class="row justify-content-around">
+    <div class="col custom-line-1 mx-4"></div>
+  </div>
+  <!-- banner carousel -->
+  <div class="row justify-content-around mt-4">
+    <div class="col-1 align-self-center text-center">
+      <button type="button" class="carousel-prev-1 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+    <div class="slider-1 col-10">
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>آرایشی و بهداشتی</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>مادر و کودک</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>مکمل ها</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>تجهیزات پزشکی</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>مراقبت از مو</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>ورزشی</div>
+      </div>
+      <div class="text-center">
+        <div class="mb-2"><img src="{% static 'img/icon.png' %}" alt=""></div>
+        <div>تخصصی</div>
+      </div>
+    </div>
+    <div class="col-1 align-self-center text-center">
+      <button type="button" class="carousel-next-1 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+  </div>
+  
+  
+
+</div>
+
+<!-- 3box under banner -->
+<div class="container">
+  <div class="row justify-content-between mt-4">
+    <div class="col-3 custom-box-1 ps-4 pe-2 pt-4" style="background-image: url('{% static 'img/box-1.png' %}');">
+        <h5 class="w-50">محصولات تقویتی و ویتامین</h5>
+        <button class="custom-button-2 mt-3">
+          <span>خرید</span>
+          <img src="{% static 'img/Arrow - Left 2.png' %}" alt="" width="16px" height="16px">
+        </button>
+    </div>
+    <div class="col-3 custom-box-2 ps-4 pe-4 pt-4" style="background-image: url('{% static 'img/box-2.png' %}');">
+      <h5 class="w-50">مکمل های ورزشی</h5>
+        <button class="custom-button-3 mt-3">
+          <span>خرید</span>
+          <img src="{% static 'img/Arrow - Left white.png' %}" alt="" width="16px" height="16px">
+        </button>
+    </div>
+    <div class="col-6 custom-box-3 ps-4 pe-2 pt-4" style="background-image: url('{% static 'img/box-3.png' %}');">
+      <h5 class="w-25">محصولات</br>مربوط به کرونا</h5>
+        <button class="custom-button-2 mt-3">
+          <span>خرید</span>
+          <img src="{% static 'img/Arrow - Left 2.png' %}" alt="" width="16px" height="16px">
+        </button>
+    </div>
   </div>
 </div>
-</section>
-<!--Section: Block Content-->
-        </section>
 
-
-
-
-<br>
-<br>
-<br>
-
-
-
-<section class="offer">
-  <h3 style="color:rgb(175, 12, 12);text-align: center;text-decoration:underline;">فروش ویژه ما</h3>
-  <br>
-  <div class="bg-image"></div>
-  <img  src="{% static 'img/فروش ویژه.JPG' %}" width="100%"  height="500px" style=" filter: blur(2px);
-  -webkit-filter: blur(2px); border-radius:2px solid white;">
-
-
-  <div class="text-center pt-4">
-
-
-    <p>.برای مشاهده فروش ویژه کلیک کنید</p>
-
-    <hr>
-
-    <a href="offer">
-    <button type="button" class="btn btn-outline-danger d-grid gap-2 col-3 mx-auto">مشاهده</button>
-    </a>
+<!-- Pishnahadate Emruz -->
+<div class="container">
+  <!-- title & button-->
+  <div class="row justify-content-between mt-65">
+    <div class="col-2">
+      <h3>پیشنهادات امروز</h3>
+    </div>
+    <div class="col-2 text-end align-self-center">
+      <span class="align-middle">
+        دیدن همه پیشنهادات امروز
+      <img class="ms-2" src="{% static 'img/Arrow - Left 2.png' %}" alt="" width="14" height="14">
+      </span>
+      
+    </div>
   </div>
+  <!-- divider line -->
+  <div class="row justify-content-around align-items-center">
+    <div class="col-2 custom-line-2 mt-2"></div>
+    <div class="col custom-line-1 mt-2"></div>
+  </div>
+  <!-- product cards slider -->
+  <div class="row justify-content-around mt-4">
+    <div class="col align-self-center text-center">
+      <button type="button" class="carousel-prev-2 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+    <div class="slider-2 col-11">
+      
+      <!-- Product Cards -->
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+      
+
+    </div>
+    <div class="col align-self-center text-center">
+      <button type="button" class="carousel-next-2 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Forushe Vizhe Banner -->
+<div class="container offer-box align-items-center mt-5">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-3 pt-4">
+      <h2>فروش ویژه محصولات مادر و کودک <i class="iconly-Arrow-Left-2 icli align-middle"></i></h2>
+    </div>
+    <div class="col-8">
+      <div class="row justify-content-around">
+        <div class="col align-self-center text-center">
+          <button type="button" class="carousel-prev-3 custom-carousel">
+            <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+          </button>
+        </div>
+        <div class="slider-3 col-10">
+          
+          <!-- Product Cards -->
+          <div class="text-center product-card product-card-2 mt-2 mb-2">
+            <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+            <div class="card-sharing justify-content-between">
+              <i class="iconly-Bookmark icli"></i>
+              <i class="iconly-Bookmark icli text-end"></i>
+            </div>
+            <div class="row mb-2">
+              <div class="col align-self-center">
+                <h6 class="text-start">کرم ضد آفتاب</h6>
+              </div>
+              <div class="col-auto align-self-center text-end">
+                <i class="iconly-Star icli"></i>
+                <h6 class="d-inline-block">۵</h6>
+              </div>
+            </div>
+            <div class="row mt-1 mb-1">
+              <div class="col">
+                <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+              </div>
+            </div> 
+            <div class="row product-card-takhfif-row mt-n1">
+              <div class="col text-end align-self-center align-middle">
+                <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+                <div class="product-card-takhfif">٪۲۰</div>
+              </div>
+            </div>   
+            <div class="row">
+              <div class="col-auto text-start">
+                <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+              </div>
+              <div class="col text-end align-self-center align-middle">
+                <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+                <small>تومان</small>
+              </div>
+            </div>
+            <div class="row justify-content-around align-items-center">
+              <div class="col custom-line-3 mt-4"></div>
+            </div> 
+            <div class="row justify-content-around align-items-center pt-1">
+              <h5 class="col offer-timer mt-3 justify-content-center">
+                ۲۲:۵۳:۱۷
+                <i class="iconly-Time-Circle icli align-self-center ps-1"></i>
+              </h5>
+            </div> 
+          </div>
+          
+          <!-- Product Cards -->
+          <div class="text-center product-card product-card-2 mt-2 mb-2">
+            <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+            <div class="card-sharing justify-content-between">
+              <i class="iconly-Bookmark icli"></i>
+              <i class="iconly-Bookmark icli text-end"></i>
+            </div>
+            <div class="row mb-2">
+              <div class="col align-self-center">
+                <h6 class="text-start">کرم ضد آفتاب</h6>
+              </div>
+              <div class="col-auto align-self-center text-end">
+                <i class="iconly-Star icli"></i>
+                <h6 class="d-inline-block">۵</h6>
+              </div>
+            </div>
+            <div class="row mt-1 mb-1">
+              <div class="col">
+                <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+              </div>
+            </div> 
+            <div class="row product-card-takhfif-row mt-n1">
+              <div class="col text-end align-self-center align-middle">
+                <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+                <div class="product-card-takhfif">٪۲۰</div>
+              </div>
+            </div>   
+            <div class="row">
+              <div class="col-auto text-start">
+                <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+              </div>
+              <div class="col text-end align-self-center align-middle">
+                <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+                <small>تومان</small>
+              </div>
+            </div>
+            <div class="row justify-content-around align-items-center">
+              <div class="col custom-line-3 mt-4"></div>
+            </div> 
+            <div class="row justify-content-around align-items-center pt-1">
+              <h5 class="col offer-timer mt-3 justify-content-center">
+                ۲۲:۵۳:۱۷
+                <i class="iconly-Time-Circle icli align-self-center ps-1"></i>
+              </h5>
+            </div> 
+          </div>
+          <!-- Product Cards -->
+          <div class="text-center product-card product-card-2 mt-2 mb-2">
+            <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+            <div class="card-sharing justify-content-between">
+              <i class="iconly-Bookmark icli"></i>
+              <i class="iconly-Bookmark icli text-end"></i>
+            </div>
+            <div class="row mb-2">
+              <div class="col align-self-center">
+                <h6 class="text-start">کرم ضد آفتاب</h6>
+              </div>
+              <div class="col-auto align-self-center text-end">
+                <i class="iconly-Star icli"></i>
+                <h6 class="d-inline-block">۵</h6>
+              </div>
+            </div>
+            <div class="row mt-1 mb-1">
+              <div class="col">
+                <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+              </div>
+            </div> 
+            <div class="row product-card-takhfif-row mt-n1">
+              <div class="col text-end align-self-center align-middle">
+                <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+                <div class="product-card-takhfif">٪۲۰</div>
+              </div>
+            </div>   
+            <div class="row">
+              <div class="col-auto text-start">
+                <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+              </div>
+              <div class="col text-end align-self-center align-middle">
+                <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+                <small>تومان</small>
+              </div>
+            </div>
+            <div class="row justify-content-around align-items-center">
+              <div class="col custom-line-3 mt-4"></div>
+            </div> 
+            <div class="row justify-content-around align-items-center pt-1">
+              <h5 class="col offer-timer mt-3 justify-content-center">
+                ۲۲:۵۳:۱۷
+                <i class="iconly-Time-Circle icli align-self-center ps-1"></i>
+              </h5>
+            </div> 
+          </div>
+          <!-- Product Cards -->
+          <div class="text-center product-card product-card-2 mt-2 mb-2">
+            <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+            <div class="card-sharing justify-content-between">
+              <i class="iconly-Bookmark icli"></i>
+              <i class="iconly-Bookmark icli text-end"></i>
+            </div>
+            <div class="row mb-2">
+              <div class="col align-self-center">
+                <h6 class="text-start">کرم ضد آفتاب</h6>
+              </div>
+              <div class="col-auto align-self-center text-end">
+                <i class="iconly-Star icli"></i>
+                <h6 class="d-inline-block">۵</h6>
+              </div>
+            </div>
+            <div class="row mt-1 mb-1">
+              <div class="col">
+                <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+              </div>
+            </div> 
+            <div class="row product-card-takhfif-row mt-n1">
+              <div class="col text-end align-self-center align-middle">
+                <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+                <div class="product-card-takhfif">٪۲۰</div>
+              </div>
+            </div>   
+            <div class="row">
+              <div class="col-auto text-start">
+                <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+              </div>
+              <div class="col text-end align-self-center align-middle">
+                <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+                <small>تومان</small>
+              </div>
+            </div>
+            <div class="row justify-content-around align-items-center">
+              <div class="col custom-line-3 mt-4"></div>
+            </div> 
+            <div class="row justify-content-around align-items-center pt-1">
+              <h5 class="col offer-timer mt-3 justify-content-center">
+                ۲۲:۵۳:۱۷
+                <i class="iconly-Time-Circle icli align-self-center ps-1"></i>
+              </h5>
+            </div> 
+          </div>
+          
+
+        </div>
+        <div class="col align-self-center text-center">
+          <button type="button" class="carousel-next-3 custom-carousel">
+            <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Brands -->
+<div class="container">
+  <div class="row justify-content-around mt-5">
+    <div class="col-1 align-self-center text-center">
+      <button type="button" class="carousel-prev-4 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+    <div class="slider-4 col-10">
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+      <div class="brands text-center">
+        <div class="mb-2"><img src="{% static 'img/brand1.png' %}" alt=""></div>
+      </div>
+    </div>
+    <div class="col-1 align-self-center text-center">
+      <button type="button" class="carousel-next-4 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 2box under brands -->
+<div class="container justify-content-center">
+  <div class="row justify-content-between mt-5">
+    <div class="col-6 custom-box-4" style="background-image: url('{% static 'img/123.jfif' %}');">
+      <h2 class="w-50">محصولات مراقبتی</br>پوستی
+        <img src="{% static 'img/left 6.png' %}" alt="">
+      </h2>
+        
+    </div>
+    <div class="col-6 custom-box-4" style="background-image: url('{% static 'img/345.jfif' %}'); padding-right: 100px;">
+      <h2 class="w-50">محصولات مراقبتی</br>پوستی
+        <img src="{% static 'img/left 6.png' %}" alt="">
+      </h2>
+        
+    </div>
+  </div>
+</div>
+
+<!-- محصولات مراقبت از دندان -->
+<div class="container">
+  <!-- title & button-->
+  <div class="row justify-content-between mt-65">
+    <div class="col-3">
+      <h3>محصولات مراقبت از دندان</h3>
+    </div>
+    <div class="col-3 text-end align-self-center">
+      <span class="align-middle">
+        دیدن همه محصولات مراقبت از دندان
+      <img class="ms-2" src="{% static 'img/Arrow - Left 2.png' %}" alt="" width="14" height="14">
+      </span>
+      
+    </div>
+  </div>
+  <!-- divider line -->
+  <div class="row justify-content-around align-items-center">
+    <div class="col-2 custom-line-2 mt-2"></div>
+    <div class="col custom-line-1 mt-2"></div>
+  </div>
+  <!-- product cards slider -->
+  <div class="row justify-content-around mt-4">
+    <div class="col align-self-center text-center">
+      <button type="button" class="carousel-prev-5 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+    <div class="slider-5 col-11">
+      
+      <!-- Product Cards -->
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+
+      <div class="text-center product-card mt-2 mb-2">
+        <img src="{% static 'img/c9faaaacf8790043e9605bde46788583.jfif' %}" class="product-card-img card-img-top mb-1" alt="...">
+        <div class="card-sharing justify-content-between">
+          <i class="iconly-Bookmark icli"></i>
+          <i class="iconly-Bookmark icli text-end"></i>
+        </div>
+        <div class="row mb-2">
+          <div class="col align-self-center">
+            <h6 class="text-start">کرم ضد آفتاب</h6>
+          </div>
+          <div class="col-auto align-self-center text-end">
+            <i class="iconly-Star icli"></i>
+            <h6 class="d-inline-block">۵</h6>
+          </div>
+        </div>
+        <div class="row mt-1 mb-1">
+          <div class="col">
+            <p class="text-start">کرم ضد آفتاب فاقد چربی SPF50 اریکه 50 میلی لیتر</p>
+          </div>
+        </div> 
+        <div class="row product-card-takhfif-row mt-n1">
+          <div class="col text-end align-self-center align-middle">
+            <div class="d-inline align-middle takhfif-price">۱۲۵.۰۰۰</div>
+            <div class="product-card-takhfif">٪۲۰</div>
+          </div>
+        </div>   
+        <div class="row">
+          <div class="col-auto text-start">
+            <button class="product-card-button"><i class="iconly-Buy icli"></i></button>
+          </div>
+          <div class="col text-end align-self-center align-middle">
+            <h5 class="d-inline align-middle">۱۰۰.۰۰۰</h5>
+            <small>تومان</small>
+          </div>
+        </div>  
+      </div>
+      
+
+    </div>
+    <div class="col align-self-center text-center">
+      <button type="button" class="carousel-next-5 custom-carousel">
+        <img src="{% static 'img/Arrow - Left 2.png' %}" alt="">
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- وبلاگ -->
+<div class="container blog mt-4 mb-5">
+  <div class="row justify-content-between">
+    <div class="col-3">
+      <h3>مجله داروخانه</h3>
+    </div>
+    <div class="col-3 text-end align-self-center">
+      <span class="align-middle">
+        دیدن همه مطالب
+      <img class="ms-2" src="{% static 'img/Arrow - Left 2.png' %}" alt="" width="14" height="14">
+      </span>
+      
+    </div>
+  </div>
+  <!-- divider line -->
+  <div class="row justify-content-around align-items-center mb-4">
+    <div class="col-2 custom-line-2 mt-2"></div>
+    <div class="col custom-line-1 mt-2"></div>
+  </div>
+  <!-- blog card -->
+  <div class="row justify-content-between pt-2">
+    <div class="col blog-card">
+      <img src="{% static 'img/Frame 59.png' %}" alt="...">
+      <div class="card-body ">
+        <h4 class="blog-title">آیا من کمبود منیزیم دارم؟</h4>
+        <div class="row">
+          <div class="d-flex align-items-center mb-4">
+            <div class="col-3">
+              <i class="iconly-Calendar icli d-inline-block align-middle"></i>
+              <div class="blog-text">12شهریور</div>
+               
+            </div>
+            <div class="col">
+              <i class="iconly-Edit-Square icli align-middle"></i>
+            <div class="blog-text">توسط محمد غفوری</div>
+            </div>
+            <div class="col-3 text-end">
+              <i class="iconly-Chat icli d-inline-block align-middle"></i>
+              <div class="blog-text">12</div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-text">نیا .تسا ندب یاهدرکلمع زا یرایسب یارب یرورض یندعم هدام کی میزینم
+          تخاس هلمج زا فلتخم یمیزنآ یاه متسیس زا یرایسب رد یندعم هدام
+          ،باصعا و اه هچیهام درکلمع ،ناوختسا دشر ،یژرنا مسیلوباتم ،نیئتورپ
+          .دراد شقن نوخ دنق لرتنک و نوخ راشف میظنت</div>
+
+          
+          <div class="row" style="margin-top: 17px;">
+          
+            <div class="col-1 me-3"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-1"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-9 text-end"><button class=" bala" >
+              <h6 class="d-inline-block">ادامه مطلب</h6>
+              <i class="iconly-Arrow-Left-2 icli d-inline-block"></i>
+            </button></div>
 
 
 
- <br>
+          </div>             
+          </div>
+    </div>
+    <div class="col blog-card">
+      <img src="{% static 'img/Frame 59.png' %}" alt="...">
+      <div class="card-body ">
+        <h4 class="blog-title">آیا من کمبود منیزیم دارم؟</h4>
+        <div class="row">
+          <div class="d-flex align-items-center mb-4">
+            <div class="col-3">
+              <i class="iconly-Calendar icli d-inline-block"></i>
+              <div class="blog-text">12شهریور</div>
+               
+            </div>
+            <div class="col">
+              <i class="iconly-Edit-Square icli"></i>
+            <div class="blog-text">توسط محمد غفوری</div>
+            </div>
+            <div class="col-3 text-end">
+              <i class="iconly-Chat icli d-inline-block"></i>
+              <div class="blog-text">12</div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-text">نیا .تسا ندب یاهدرکلمع زا یرایسب یارب یرورض یندعم هدام کی میزینم
+          تخاس هلمج زا فلتخم یمیزنآ یاه متسیس زا یرایسب رد یندعم هدام
+          ،باصعا و اه هچیهام درکلمع ،ناوختسا دشر ،یژرنا مسیلوباتم ،نیئتورپ
+          .دراد شقن نوخ دنق لرتنک و نوخ راشف میظنت</div>
 
-  </section>
+          
+          <div class="row" style="margin-top: 17px;">
+          
+            <div class="col-1 me-3"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-1"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-9 text-end"><button class=" bala" >
+              <h6 class="d-inline-block">ادامه مطلب</h6>
+              <i class="iconly-Arrow-Left-2 icli d-inline-block"></i>
+            </button></div>
 
-<br>
-<br>
 
 
-<!---********************mahsoolat*******-->
+          </div>             
+          </div>
+    </div>
+    <div class="col blog-card">
+      <img src="{% static 'img/Frame 59.png' %}" alt="...">
+      <div class="card-body ">
+        <h4 class="blog-title">آیا من کمبود منیزیم دارم؟</h4>
+        <div class="row">
+          <div class="d-flex align-items-center mb-4">
+            <div class="col-3">
+              <i class="iconly-Calendar icli d-inline-block"></i>
+              <div class="blog-text">12شهریور</div>
+               
+            </div>
+            <div class="col">
+              <i class="iconly-Edit-Square icli"></i>
+            <div class="blog-text">توسط محمد غفوری</div>
+            </div>
+            <div class="col-3 text-end">
+              <i class="iconly-Chat icli d-inline-block"></i>
+              <div class="blog-text">12</div>
+            </div>
+          </div>
+        </div>
+        <div class="blog-text">نیا .تسا ندب یاهدرکلمع زا یرایسب یارب یرورض یندعم هدام کی میزینم
+          تخاس هلمج زا فلتخم یمیزنآ یاه متسیس زا یرایسب رد یندعم هدام
+          ،باصعا و اه هچیهام درکلمع ،ناوختسا دشر ،یژرنا مسیلوباتم ،نیئتورپ
+          .دراد شقن نوخ دنق لرتنک و نوخ راشف میظنت</div>
+
+          
+          <div class="row" style="margin-top: 17px;">
+          
+            <div class="col-1 me-3"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-1"><i class="iconly-Bookmark icli blog-sharing"></i></div>
+            <div class="col-9 text-end"><button class=" bala" >
+              <h6 class="d-inline-block">ادامه مطلب</h6>
+              <i class="iconly-Arrow-Left-2 icli d-inline-block"></i>
+            </button></div>
+
+
+
+          </div>             
+          </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
