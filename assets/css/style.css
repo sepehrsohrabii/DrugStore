@@ -116,10 +116,7 @@ img.IconlyTwo-toneSearch {
     padding: 0;
   }
 .welcome-name {
-    width: 98px;
-    
     flex-grow: 0;
-    
     letter-spacing: normal;
     text-align: right;
     color: #000;

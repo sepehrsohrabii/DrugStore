@@ -36,12 +36,29 @@
               </div>
               <div class="col-3 text-left d-flex align-items-center justify-content-end">
                   <div class="Acount---Basket">
-                      <span class="welcome-name">
+                    <div class="dropdown">
+                      <a type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="welcome-name me-3">
+                        {% if user.is_authenticated %}
                           سلام، خوش آمدید
+                        {% else %}
+                          ورود به حساب کاربری
+                        {% endif %}
                         </span>
                         <img src="{% static 'img/Profile.png' %}" class="IconlyTwo-toneSearch">
-                        <div class="Vector-1"></div>
-                        <a href=""><img src="{% static 'img/Cart-header.png' %}" class="IconlyTwo-toneSearch"></a>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_authenticated %}
+                          <li><a class="dropdown-item" href="{% url 'gallery:logout' %}">خروج</a></li>
+                          <li><a class="dropdown-item" href="{% url 'gallery:history' %}">تاریخچه خرید</a></li>
+                        {% else %}
+                          <li><a class="dropdown-item" href="{% url 'gallery:login' %}">ورود</a></li>
+                          <li><a class="dropdown-item" href="{% url 'gallery:register' %}">ثبت نام</a></li>
+                        {% endif %}
+                      </ul>
+                    </div>
+                      <div class="Vector-1"></div>
+                      <a href=""><img src="{% static 'img/Cart-header.png' %}" class="IconlyTwo-toneSearch"></a>
                   </div>
               </div>
           </div>
