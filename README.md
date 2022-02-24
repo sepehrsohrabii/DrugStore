@@ -1,4 +1,4 @@
-# Didikala
+
 
 Django Ecommerce | Build Advanced Django Web Application
 <br>
