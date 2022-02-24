@@ -1,0 +1,207 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block header_ref %}
+    
+{% endblock %}
+
+{% block title %}
+    اطلاعات پرداخت
+{% endblock %}
+
+{% block description %}
+    اطلاعات پرداخت شما
+{% endblock %}
+
+{% block keyword %}
+    اطلاعات پرداخت مشتری
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row justify-content-around align-items-center">
+        <div class="col custom-line-1 mt-4"></div>
+    </div>
+
+    <!-- sabad header -->
+    <div class="row">
+      <div class=" shipping-details align-items-center d-flex justify-content-center">
+
+        <a href="/cart" class="col text-left d-flex align-items-center justify-content-end">
+            <img src="{% static 'img/cart-page-icon.svg' %}" width="40px" height="40px">
+            <h5 class="primary-dark ms-3">سبد خرید</h5>
+        </a>
+
+        <span class="linear-gradient activated"></span>
+
+        <a href="/shipping" class="text-left d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/address-page-active.svg' %}" width="40px" height="40px">
+            <h5 class="primary-dark ms-3">اطلاعات ارسال</h5>
+        </a>
+
+        <span class="linear-gradient activated"></span>
+
+        <a href="/payment" class="col text-left d-flex align-items-center justify-content-start">
+            <img src="{% static 'img/payment-page-active.svg' %}" width="40px" height="40px">
+            <h5 class="primary-dark ms-3">اطلاعات پرداخت</h5>
+        </a>
+
+      </div>
+    </div>
+
+
+    <div class="row sabad-title">
+      <h6 class="col-3 text-left d-flex align-items-center ps-5">بررسی نهایی</h6>
+    </div>
+
+    {% if shopcart %}
+        <div class="row">
+            <div class="col-8">
+            {% for rs in shopcart %}
+                <div class="row justify-content-between m-4 py-3 px-2 me-0">
+                    <div class="col-8 d-flex align-items-center">
+                        <div>
+                            <a href="{{ rs.product.get_absolute_url }}">
+                                <img src="{{ rs.product.image.url }}" width="128px" height="128px" alt="">
+                            </a>
+                        </div>
+                        <div class="col ms-4 ps-2">
+                            <div class="row">
+                                <a href="{{ rs.product.get_absolute_url }}">
+                                    <h6>{{ rs.product.title }}</h6>
+                                </a>
+                            </div>
+                            <div class="row">
+                                <span class="fw-light light-gray mt-2">
+                                    {{ rs.product.title_eng }}
+                                </span>
+                            </div>
+                            <div class="row">
+                                <h6 class="gray mt-2">کد محصول: {{ rs.product.id }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if not forloop.last %}
+                <div class="row justify-content-around align-items-center">
+                    <div class="col shipping-cart-divider"></div>
+                </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="col payment-middlebox my-3 ms-4">
+                <div class="row mb-3 px-4">
+                    <div class="col d-flex align-items-center justify-content-start">
+                        <i class="iconly-Location icli primary-dark fs-4 me-2"></i>
+                        <h6>ارسال به:</h6>
+                    </div>
+                </div>
+                <div class="row mb-2 px-4">
+                    <div class="col d-flex align-items-top justify-content-start">
+                      <i class="iconly-Location icli primary-light fs-5 me-2 icon-box text-center ps-1"></i>
+                      <p>{{ selected_address.address }}</p>
+                    </div>
+                </div>
+                <div class="row mb-2 px-4">
+                    <div class="col d-flex align-items-center justify-content-start">
+                      <div class="me-2 icon-box text-center"></div>
+                      <p>کدپستی:‌ {{ selected_address.post_code }}</p>
+                    </div>
+                </div>
+                <div class="row px-4">
+                    <div class="col d-flex align-items-center justify-content-start">
+                      <i class="iconly-Calling icli primary-light fs-5 me-2 icon-box text-center"></i>
+                      <h6 class="fw-light">{{ selected_address.phone }}</h6>
+                    </div>
+                </div>
+                <div class="row justify-content-around align-items-center mt-3 pt-1">
+                    <div class="col shipping-cart-divider"></div>
+                </div>
+                <div class="row mb-3 px-4 mt-4">
+                    <div class="col d-flex align-items-center justify-content-start">
+                        <img class="me-2" src="{% static 'img/Group 11.svg' %}" alt="شیوه_ارسال">
+                        <h6>شیوه ارسال</h6>
+                    </div>
+                </div>
+                <div class="row mb-2 px-4">
+                    <div class="col d-flex align-items-center">
+                      <img class="me-2" src="{{ selected_post_way.image.url }}" height="16">
+                      <p>{{ selected_post_way.way }}</p>
+                      <p class="gray fw-light ms-4">{{ selected_post_way.duration | default:"" }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    {% else %}
+        <h3>سبد خرید شما خالیست</h3>
+    {% endif %}
+    
+    <div class="row cart-bottom-box">
+
+      <div class="col-8 mt-4 ps-3">
+        <div class="row mb-4">
+            <div class="col d-flex align-items-center justify-content-start">
+              <img class="me-2" src="{% static 'img/Group 11.svg' %}" alt="شیوه_ارسال">
+              <h5>انتخاب درگاه پرداخت:</h5>
+            </div>
+        </div>
+      </div>
+      <!-- divider  -->
+      <span class="cart-h-divider"></span>
+
+      <div class="col mt-4 mb-4 ms-5 me-3 pe-3">
+        
+        <div class="row d-flex justify-content-around align-items-center">
+          <h6 class="col-7 fw-light">مجموع قیمت:</h6>
+          <h6 class="col text-end primary-dark">{{ totalPrice_takhfif|intcomma:False }}<span class="cart-tooman ms-2">تومان</span></h6>
+        </div>
+
+        <div class="row d-flex justify-content-around align-items-center mt-2 mb-3">
+          <h6 class="col-7 fw-light">هزینه ارسال، بیمه و بسته‌بندی:</h6>
+          <h6 class="col text-end primary-light">
+            {% if selected_post_way.price == 0 %}
+                رایگان
+            {% elif selected_post_way.price > 0 %}
+                {{ selected_post_way.price|intcomma:False }}<span class="cart-tooman ms-2">تومان</span>
+            {% else %}
+                پس کرایه
+            {% endif %}
+          </h6>
+        </div>
+
+        <div class="row d-flex justify-content-around align-items-center">
+          <h6 class="col-7">مبلغ قابل پرداخت:</h6>
+          <h4 class="col text-end">{{ totalPrice_takhfifWithPost|intcomma:False }}<span class="cart-tooman ms-2">تومان</span></h4>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="row mt-4" style="margin-bottom: 340px;">
+
+      <div class="d-flex me-4 pre-footer-cart">
+        <p>این داروخانه آنلاین زیر مجموعه‌ی داروخانه‌ی دکتر ارجمند می باشد و کلیه‌ی محصولات عرضه شده در سایت، دارای مجوز رسمی از سازمان غذا و دارو می باشد. </p>
+      </div>
+     
+      <form class="width-fit" action="{% url 'order_completed' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="cart-button">
+            <h5>ثبت و مرحله بعد</h5>
+        </button>
+      </form>
+
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block footer_ref %}
+{% endblock %}

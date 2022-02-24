@@ -1,0 +1,76 @@
+{% load static %}
+<!-- ** Start EZAFII ** -->
+<!-- colorPanel -->
+{#<div id="colorswitch-option">#}
+{#    <button><i class="mdi mdi-settings"></i></button>#}
+{#    <ul>#}
+{#        <li class="active" data-path="./assets/css/colors/default.css"><span style="background-color: #f7858d;"></span>#}
+{#        </li>#}
+{#        <li data-path="./assets/css/colors/amber-color.css"><span style="background-color: #ffab00;"></span></li>#}
+{#        <li data-path="./assets/css/colors/blue-color.css"><span style="background-color: #2979ff;"></span></li>#}
+{#        <li data-path="./assets/css/colors/blue-grey-color.css"><span style="background-color: #607d8b;"></span></li>#}
+{#        <li data-path="./assets/css/colors/brown-color.css"><span style="background-color: #795548;"></span></li>#}
+{#        <li data-path="./assets/css/colors/cyan-color.css"><span style="background-color: #00bcd4;"></span></li>#}
+{#        <li data-path="./assets/css/colors/green-color.css"><span style="background-color: #4caf50;"></span></li>#}
+{#        <li data-path="./assets/css/colors/indigo-color.css"><span style="background-color: #3f51b5;"></span></li>#}
+{#        <li data-path="./assets/css/colors/lime-color.css"><span style="background-color: #cddc39;"></span></li>#}
+{#        <li data-path="./assets/css/colors/orange-color.css"><span style="background-color: #ff9800;"></span></li>#}
+{#        <li data-path="./assets/css/colors/red-color.css"><span style="background-color: #f44336;"></span></li>#}
+{#        <li data-path="./assets/css/colors/teal-color.css"><span style="background-color: #009688;"></span></li>#}
+{#        <li data-path="./assets/css/colors/purple-color.css"><span style="background-color: #9c27b0;"></span></li>#}
+{#    </ul>#}
+{#</div>#}
+<!-- end colorPanel -->
+<!-- Core JS Files -->
+{#<script src="{% static 'js/vendor/jquery-3.4.1.min.js' %}"></script>#}
+<!-- ** End EZAFII ** -->
+<script src="{% static 'js/material-components-web.min.js' %}"></script>
+<!--ezafi
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+-->
+<!--ezafi
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+-->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+
+<script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'slick/slick/slick.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+<script>
+      function topFunction() {
+              // window.requestAnimationFrame(topFunction);
+              // window.scrollTo(0, document.documentElement.scrollTop - document.documentElement.scrollTop / 10);
+              
+              document.body.scrollTop = 0;
+              document.documentElement.scrollTop = 0;
+              // window.webkitRequestAnimationFrame(topFunction);
+          }
+      function show_alert_message(msg, prort) {
+        topFunction();
+        console.log(msg)
+        $("#ele").trigger("add-alerts", [
+          {
+            "message": msg,
+            "priority": prort
+          }
+        ]);
+      }
+      
+      });
+      
+      {% block script %}
+
+
+      {% endblock %}
+</script>

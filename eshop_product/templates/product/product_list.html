@@ -1,0 +1,376 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load humanize %}
+{% load mptt_tags %}
+{% load filter_tags %}
+
+{% block header_ref %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- banner -->
+    <div class="row mt-4">
+      <div class="row justify-content-around align-items-center banner-shop">
+    </div>
+    </div>
+    <!-- breadcrumb -->
+    <div class="row mt-4">
+      <div class="col breadcrumb breadcrumb-shop">
+        <nav class="d-flex" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb align-items-center ps-4">
+            <li class="breadcrumb-item"><a href="/">خانه</a></li>
+            {% for category in categories %}
+            {% if category.parent.parent.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' category.parent.parent.parent.slug %}">
+                  {{ category.parent.parent.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if category.parent.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' category.parent.parent.slug %}">
+                  {{ category.parent.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if category.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' category.parent.slug %}">
+                  {{ category.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if category.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' category.slug %}">
+                  {{ category }}
+                </a>
+              </li>
+            {% endif %}
+            {% endfor %}
+          </ol>
+        </nav>
+      </div>
+    </div>
+    
+            
+    
+  
+
+    <!-- فیلتر های فروشگاه -->
+
+    <div class="row mt-4">
+      <div class="col-3 pe-4">
+
+        <div class="row justify-content-between mt-3 mb-1 me-1">
+            <div class="col-2 ms-1">
+              <h5>فیلترها</h5>
+            </div>
+            <div class="col-4 me-1 text-end">
+              {% for category in categories %}
+                <a class="hazf-filter" href="{% url 'product_category_list' category.slug %}">حذف فیلترها</a>
+              {% endfor %}
+            </div>
+        </div>
+        <div class="row justify-content-around align-items-center">
+          <div class="col-2 custom-line-2 mt-2"></div>
+          <div class="col custom-line-1 mt-2"></div>
+        </div>
+        <!-- آکاردئون کتگوری ها -->
+        <form method="get" id="shop-filter" action="">
+
+          {% if request.GET.q %}
+            <input type="text" hidden value="{{ request.GET.q }}" name='q'>
+          {% endif %}
+
+          <h6 class="mt-4 ms-3 primary-dark">دسته‌بندی نتایج</h6>
+          <div class="accordion ms-4 mt-2" id="accordionExample">
+            {% recursetree category %}
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ node.slug }}">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ node.slug }}" aria-expanded="true" aria-controls="collapse{{ node.slug }}">
+                    <p class="fw-bold">{{ node.title }}</p>
+                  </button>
+                </h2>
+                <div id="collapse{{ node.slug }}" class="accordion-collapse collapse" aria-labelledby="heading{{ node.slug }}" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    {% drilldown_tree_for_node node as parent all_descendants %}
+                      
+                        {% for category in parent %}
+                          <div>
+                            {% if category.is_child_node and category.level < 2 %}
+                              <a class="primary-light" href="/category/{{category.slug}}">- {{category.title}}</a>
+                            {% elif category.is_child_node and category.level < 3 %}
+                              <a class="ps-2 pt-2" href="/category/{{category.slug}}">{{category.title}}</a>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                    
+                  </div>
+                </div>
+              </div>
+            {% endrecursetree %}
+          </div>
+
+          <div class="filter-separator-line"></div>
+
+          <!-- فیلتر جستجو  -->
+          <h6 class="mt-4 ms-3 primary-dark">جستجو</h6>
+          <div class="align-self-center ps-3 pe-3 mt-2">
+            <label class="search-shop mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="my-label-id">جستجو کالا مورد نظر</span>
+                <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                <i class="iconly-Search icli"></i>
+                <span class="mdc-line-ripple"></span>
+            </label>
+          </div>
+          
+          <div class="filter-separator-line"></div>
+
+          <!-- فیلتر برند -->
+          <div class="row ps-3 pe-3">
+            <div class="col">
+              <h6 class="primary-dark">برند</h6>
+              <div class="align-self-center mt-2 mb-4">
+                <label class="search search-shop mdc-text-field mdc-text-field--filled mdc-text-field--with-trailing-icon">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="my-label-id">جستجو برند مورد نظر</span>
+                    <input class="mdc-text-field__input" type="text" aria-labelledby="my-label-id">
+                    <i class="iconly-Search icli"></i>
+                    <span class="mdc-line-ripple"></span>
+                  </label>
+              </div>
+              {% for brand in brands %}
+                {% if forloop.counter < 7 %}
+                  <div class="row">
+                    <div class="col form-check">
+                      <input class="form-check-input form-checkbox me-2" type="checkbox" value="{{ brand.slug }}" id="flexCheckDefault{{ brand.id }}" {% if "brand"|check_url:brand.slug in request.GET.urlencode %}checked{% endif %} name="brand" onclick="this.form.submit()">
+                      <label class="form-check-label" for="flexCheckDefault{{ brand.id }}">
+                        <p class="fw-bold primary-dark">{{ brand.title }}</p>
+                      </label>
+                      
+                    </div>
+                    <div class="col text-end d-flex align-items-center justify-content-end">
+                      <p class="gray">{{ brand.title_eng }}</p>
+                    </div>
+                  </div>
+                {% else %}
+                  <div id="shop-brands" class="collapse">
+                    <div class="row">
+                      <div class="col form-check">
+                        
+                        <input class="form-check-input form-checkbox me-2" type="checkbox" value="{{ brand.slug }}" id="flexCheckDefault{{ brand.id }}" {% if "brand"|check_url:brand.slug in request.GET.urlencode %}checked{% endif %} name="brand" onclick="this.form.submit()">
+                        <label class="form-check-label" for="flexCheckDefault{{ brand.id }}">
+                          <p class="fw-bold primary-dark">{{ brand.title }}</p>
+                        </label>
+                      </div>
+                      <div class="col text-end d-flex align-items-center justify-content-end">
+                        <p class="gray">{{ brand.title_eng }}</p> 
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+              <div class="container mt-3">
+                <button type="button" class="btn custom-button-4" type="button" data-bs-toggle="collapse" data-bs-target="#shop-brands">مشاهده همه +</button>
+              </div>
+          </div>
+      </div>
+
+          <div class="filter-separator-line"></div>
+
+          <!-- فیلتر قیمت -->
+          <div class="row ps-3 pe-3">
+            <div class="col">
+              <h6 class="mb-2">محدوده قیمت</h6>
+              <div class="slider" data-value-0="#first" data-value-1="#second" data-range="#third" id="slider-range" ondrag="this.form.submit()"></div>
+              <div class="values">
+                <div class="d-flex justify-content-between" id="slider-value">
+                  <div>
+                    <span class="fw-bold" id="second"></span>
+                    تومان
+                  </div>
+                  <div>
+                    <span class="fw-bold" id="first"></span>
+                    تومان
+                  </div>
+                  <input type="text" hidden id="input-first" name="min_price">
+                  <input type="text" hidden id="input-second" name="max_price">
+                </div>
+              </div>
+            </div>
+          </div> 
+          
+          <input type="text" hidden class="custom-control-input but"
+                                   id="orderBy"
+                                  {% if 'order_by=view_count' in request.GET.urlencode or 'order_by' not in request.GET.urlencode %}
+                                    value="view_count"
+                                  {% elif 'order_by=price' in request.GET.urlencode %}
+                                    value="price"
+                                  {% elif 'order_by=-price' in request.GET.urlencode %}
+                                    value="-price"
+                                  {% elif 'order_by=all_sale' in request.GET.urlencode %}
+                                    value="all_sale"
+                                  {% elif 'order_by=-percent' in request.GET.urlencode %}
+                                    value="-percent"
+                                  {% endif %}
+                                   name="order_by">
+          <input class="switch-toggle form-check-input" hidden type="text" id="switcher-1" name="amount" 
+          {% if  "amount=0" in  request.GET.urlencode or 'amount' not in request.GET.urlencode %}
+          value="0"
+          {% elif "amount=1" in  request.GET.urlencode %}
+          value="1"
+          {% endif %}>
+          <!--<div><button type="submit">فیلتر کردن</button></div>-->
+        </form>
+        <div class="filter-separator-line"></div>
+      </div>
+
+      <div class="col-9">
+        <!-- فیلتر تاریخ و قیمت  -->
+        <div class="row orderby justify-content-start">
+          <div class="col ms-4"><h6>ترتیب نمایش:</h6></div>
+          <div class="col-7">
+            <a data-order="view_count" class="orderby-links me-2 {% if 'order_by=view_count' in request.GET.urlencode or 'order_by' not in request.GET.urlencode %}active{% endif %}" href="{% order_url 'view_count' 'order_by' request.GET.urlencode %}" id="current">پر بازدیدها</a>
+            <a data-order="price" class="orderby-links me-2 {% if 'order_by=price' in request.GET.urlencode %}active{% endif %}" href="{% order_url 'price' 'order_by' request.GET.urlencode %}">ارزان ترین</a>
+            <a data-order="-price" class="orderby-links me-2 {% if 'order_by=-price' in request.GET.urlencode %}active{% endif %}" href="{% order_url '-price' 'order_by' request.GET.urlencode %}">گران ترین</a>
+            <a data-order="all_sale" class="orderby-links me-2 {% if 'order_by=all_sale' in request.GET.urlencode %}active{% endif %}" href="{% order_url 'all_sale' 'order_by' request.GET.urlencode %}">پر فروش ترین</a>
+            <a data-order="-percent" class="orderby-links me-2 {% if 'order_by=-percent' in request.GET.urlencode %}active{% endif %}" href="{% order_url '-percent' 'order_by' request.GET.urlencode %}">تخفیف دار</a>
+          </div>
+          <div class="col-3"> 
+            <div class="form-check form-switch justify-content-end">
+              <label class="form-check-label" for="flexSwitchCheckDefault"><p class="orderby-toogle-label pe-2">فقط کالاهای موجود</p></label>
+              <form method="get" action="">
+                {% if request.GET.q %}
+                    <input type="text" hidden value="{{ request.GET.q }}" name='q'>
+                {% endif %}
+                
+                <input class="switch-toggle form-check-input" onclick="this.form.submit()" type="checkbox" id="switcher-1" name="amount" value="1"
+                {% if  "amount=1" in  request.GET.urlencode %}checked{% endif %}>
+                
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+
+            <!-- Product Cards --> 
+            {% if page_obj %}
+              {% for product in page_obj %}
+              <div class="text-center product-card mt-2 mb-2">
+                <a href="{{ product.get_absolute_url }}">
+                  <img src="{{product.image.url}}" class="product-card-img card-img-top mb-1 mt-3" alt="{{product.title}}">
+                </a>
+                <div class="card-sharing justify-content-between">
+                  <i class="iconly-Bookmark icli"></i>
+                  <i class="iconly-Bookmark icli text-end"></i>
+                </div>
+                <div class="product-card-detail">
+                  <div class="row mb-2">
+                    <div class="col align-self-center">
+                      <a href="{{ product.get_absolute_url }}">
+                        <h6 class="text-start">{{product.title_short}}</h6>
+                      </a>
+                    </div>
+                    <div class="col-auto align-self-center text-end">
+                      <i class="iconly-Star icli"></i>
+                      <h6 class="d-inline-block">{{product.get_avg_stars_percent}}</h6>
+                    </div>
+                  </div>
+                  <div class="row mt-1 mb-1">
+                    <div class="col">
+                      <p class="text-start product-card-desc">{{product.description}}</p>
+                    </div>
+                  </div> 
+                  
+                  <div class="row product-card-takhfif-row mt-n1">
+                    <div class="col text-end align-self-center align-middle">
+                      {% if product.amount > 0 %}
+                        {% if not product.percent == 0 %}
+                        <div class="d-inline align-middle takhfif-price">{{product.price|intcomma:False}}</div>
+                        <div class="product-card-takhfif">٪{{product.percent}}</div>
+                        {% elif product.percent == 0 %}
+                        {% endif %}
+                      {% else %}
+                      {% endif %}
+                    </div>
+                  </div>   
+                  {% if product.amount > 0 %}
+                  <div class="row">
+                    <div class="col-auto text-start">
+                      <a href="{% url 'addToShopCart' id=product.id  variantid=0 %}">
+                        <button class="product-card-button">
+                          <i class="iconly-Buy icli"></i>
+                        </button>
+                      </a>
+                    </div>
+                    <div class="col text-end align-self-center align-middle">
+                      <h5 class="d-inline align-middle">{{ product.get_product_offer_price|intcomma:False }}</h5>
+                      <small>تومان</small>
+                    </div>
+                  </div>
+                  {% else %}
+                  <div class="row justify-content-center">
+                    <button class="custom-button-7"><span>ناموجود</span></button>
+                  </div>
+                  {% endif %}
+                  
+                </div>
+              </div>
+              {% endfor %}
+            {% else %}
+              <div class="alert alert-danger text-center mr-5 ml-5 btn-block" role="alert">
+                  متاسفانه محصولی یافت نشد
+              </div>
+            {% endif %}
+
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="row align-items-end">
+          {% if page_obj %}      
+          <div class="pagination">
+            {% if page_obj.has_previous %}
+              <a href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}">&lt;</a>
+            {% endif %}
+            
+            {% for page in page_obj.paginator.page_range %}
+              {% if page == page_obj.number %}
+                  <a href="{% my_url page 'page' request.GET.urlencode %}"
+                      class="active">{{ page }}</a>
+              {% else %}
+                  <a href="{% my_url page 'page' request.GET.urlencode %}">{{ page }}</a>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <a href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}">&gt;</a>
+            {% endif %}
+
+          </div>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+  var url_string = window.location.href
+  var url = new URL(url_string);
+  var min_price = url.searchParams.get("min_price") || {{price_min_max.price__min}};
+  var max_price = url.searchParams.get("max_price") || {{price_min_max.price__max}};
+</script>
+{% endblock %}
+{% block footer_ref %}
+    
+
+{% endblock %}
+
+

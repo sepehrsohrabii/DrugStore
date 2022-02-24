@@ -1,0 +1,109 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block header_ref %}
+    
+{% endblock %}
+
+{% block title %}
+    پرداخت موفق
+{% endblock %}
+
+{% block description %}
+    پرداخت موفق
+{% endblock %}
+
+{% block keyword %}
+    پرداخت موفق
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row justify-content-around align-items-center">
+        <div class="col custom-line-1 mt-4"></div>
+    </div>
+
+    <!-- sabad header -->
+    <div class="row">
+      <div class="custom-box-5">
+        <div class="row justify-content-center mb-5">
+            <div class="col-5">
+                <h3>سفارش شما با موفقیت ثبت شد.</h3>
+                <h5 class="gray mt-2 mb-4">شماره سفارش : {{ order.code }}</h5>
+                <div class="row d-flex align-items-center">
+                    <button class="custom-button-8 me-3">پیگیری سفارش</button>
+                    <a class="primary-light width-fit" href="">
+                        <h5>بازگشت به صفحه اصلی سایت</h5>
+                    </a>
+                </div>
+            </div>
+            <div class="col-2">
+                <img src="{% static 'img/payment-complete.svg' %}" alt="">
+            </div>
+        </div>
+        <div class="row justify-content-around align-items-center pt-5">
+            <div class="col custom-line-1 mt-4"></div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-7">
+                <h6 class="mb-5">تاریخ :‌ ۲۸ شهریور ۱۴۰۰</h6>
+                <div class="d-flex mb-2">
+                    <i class="iconly-Profile icli primary-light fs-5 me-2 icon-box text-center"></i>
+                    <h6 class="me-5">{{ order.address_full_name}}</h6>
+
+                    <i class="iconly-Calling icli primary-light fs-5 me-2 icon-box text-center"></i>
+                    <h6>{{ order.address_phone }}</h6>
+                </div>
+                <div class="d-flex">
+                    <i class="iconly-Location icli primary-light fs-5 me-2 icon-box text-center"></i>
+                    <h6>{{ order.address_address }}</h6>
+                </div>
+                <div class="row mt-3 mb-5">
+                    <h6>ارسال با {{ order.post_way }}</h6>
+                </div>
+                {% for rs in shopcart %}
+                    <div class="row mb-3">
+                        <div class="col-7">
+                            <h6>{{ rs.product.title }}</h6>
+                        </div>
+                        <div class="col-5 d-flex">
+                            <h6 class="me-5">{{rs.quantity}} عدد</h6>
+                            <h6 class="ps-5">{{ rs.amount|intcomma:False }}</h6>
+                            <span class="cart-tooman ms-2">تومان</span>
+                        </div>
+                    </div>
+                {% endfor %}
+                
+                <div class="row mt-5 justify-content-end">
+                    <div class="col-5 d-flex">
+                        <h6 class="me-5">هزینه ارسال:</h6>
+                        <h6>
+                            {% if selected_post_way.price == 0 %}
+                                رایگان
+                            {% elif selected_post_way.price > 0 %}
+                                {{ selected_post_way.price|intcomma:False }}<span class="cart-tooman ms-2">تومان</span>
+                            {% else %}
+                                پس کرایه
+                            {% endif %}
+                        </h6>
+                    </div>
+                </div>
+                <div class="row mt-3 justify-content-end">
+                    <div class="col-5 d-flex">
+                        <h4 class="me-3 fw-bold">مجموع پرداخت:</h4>
+                        <h4 class="fw-bold">{{ totalPrice_takhfifWithPost|intcomma:False }} تومان</h4>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer_ref %}
+{% endblock %}

@@ -1,0 +1,160 @@
+{% load static %}
+{% load mptt_tags %}
+{% load humanize %}
+
+<!-- Start header -->
+<header class="mt-65">
+    <div class="container mb-43">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-2 align-self-center">
+              <a href="/"><img src="{% static 'img/Group 7.png' %}"></a>
+            </div>
+            <div class="col-7 align-self-center ps-5 search-area">
+              
+              <!--
+                <div class="dropdown">
+                  <form action="/product_list/search" class="search" method="get">
+                    <input id="query" class="search-input" type="text" autocomplete="off"
+                            onclick="$('#dropdown-search').toggle()" placeholder="جستجو" value="{{ request.GET.q }}" name='q'>
+                    <button class="nostyle-button search-icon-button" type="submit">
+                      <img src="{% static './img/Iconly/Two-tone/Search.webp' %}" class="IconlyTwo-toneSearch">
+                    </button>
+                    <button type="button" hidden id="SearchdropdownMenu" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                    <div class="dropdown-menu" id="dropdown-search" aria-labelledby="SearchdropdownMenu">
+                      <div class="search-result">
+                        <div id="query"></div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              -->
+              <form action="/product_list/search" id="search-form" autocomplete="off" method="get">
+                {% csrf_token %}
+                <input type="text" class="search-input" name="q" id="search-input" placeholder="جستجو" value="{{ request.GET.q }}">
+                <button class="nostyle-button search-icon-button" type="submit">
+                  <i class="iconly-Search icli"></i>
+                </button>
+                <div class="row">
+                  <div id="results-box" class="results-card dropdown-menu not-visible owl-carousel owl-theme" name="results-box">
+                    
+                  </div>
+                </div>
+              </form>
+                
+              
+            </div>
+
+
+            <div class="col-3 text-left d-flex align-items-center justify-content-end">
+                <div class="Acount---Basket">
+                  <div class="dropdown">
+                    <a type="button" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="welcome-name me-3">
+                      {% if user.is_authenticated %}
+                        سلام، خوش آمدید
+                      {% else %}
+                        <a href="{% url 'login' %}">ورود به حساب کاربری</a>
+                      {% endif %}
+                      </span>
+                      <img src="{% static 'img/Profile.png' %}" class="IconlyTwo-toneSearch">
+                    </a>
+                    
+                  </div>
+                    <div class="Vector-1"></div>
+                    <a href="/cart">
+                      <span class="header-cart-counter">{{ totalCount }}</span>
+                      <img src="{% static 'img/Cart-header.png' %}" class="IconlyTwo-toneSearch">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+      <div class="row justify-content-between align-items-center">
+          <div class="col-2 align-self-center">
+            <div class="dropdown">
+              <button class="categories_button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'img/categories-icon.png' %}" class="IconlyTwo-toneSearch">
+                      دسته بندی محصولات
+              </button>
+              <div class="dropdown-menu" id="dropdown-categories" aria-labelledby="dropdownMenuButton1">
+                <div class="d-flex align-items-start">
+                  <div class="nav flex-column nav-pills mt-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    
+                    {% recursetree category %}
+                    <button class="dropdown-categories-title text-start mb-1" id="v-pills-{{node.slug}}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{node.slug}}" type="button" role="tab" aria-controls="v-pills-{{node.slug}}" aria-selected="true">{{ node.title }}</button>
+                    {% endrecursetree %}
+                  </div>
+                  <div class="dropdown-categories-border"></div>
+                  <div class="tab-content w-100 p-4" id="v-pills-tabContent">
+                    {% recursetree category %}
+                    <div class="tab-pane fade" id="v-pills-{{node.slug}}" role="tabpanel" aria-labelledby="v-pills-{{node.slug}}-tab">
+                      
+                      
+                      {% drilldown_tree_for_node node as parent all_descendants %}
+                      
+                        {% for category in parent %}
+                          <div class="col-2">
+                            {% if category.is_child_node and category.level < 2 %}
+                              <a class="primary-light mt-3" href="/category/{{category.slug}}">- {{category.title}}</a>
+                            {% elif category.is_child_node and category.level < 3 %}
+                              <a class="ps-2 pt-2" href="/category/{{category.slug}}">{{category.title}}</a>
+
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                    </div>
+                    {% endrecursetree %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              
+          </div>
+          <div class="col-8 align-self-center">
+            <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="#">درباره داروخانه</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">مجله آنلاین</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link custom-nav-1" href="#">راهنمای خرید</a>
+              </li>
+                  </ul>
+          </div>
+          <div class="col-2 text-left d-flex align-items-center justify-content-end">
+            <a href="#">
+              <img src="{% static 'img/Group 5.png' %}">
+              <span class="custom-nav-1 ms-1 me-2">
+                  دریافت نسخه دیجیتال
+              </span>
+            </a>
+          </div>
+      </div>
+    </div>
+  </header>
+<!-- End header -->
+<!--
+<script>
+  $(function () {
+      $("#query").autocomplete({
+          source: "search_auto/",
+          select: function (event, ui) { //item selected
+              AutoCompleteSelectHandler(event, ui)
+          },
+          minLength: 2,
+      });
+  });
+
+  function AutoCompleteSelectHandler(event, ui) {
+      var selectedObj = ui.item;
+  }
+  
+</script>
+-->
+<script type="text/javascript">
+  var search_url = {% url 'search_results' %}
+</script>

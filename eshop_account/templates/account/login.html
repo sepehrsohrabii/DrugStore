@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#f7858d">
+    <meta name="msapplication-navbutton-color" content="#f7858d">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#f7858d">
+
+    <title>{% block title %}
+        ورود به حساب کاربری
+    {% endblock %}
+    </title>
+
+    {% include 'shared/_HeaderReferences.html' %}
+
+</head>
+<body>
+<div class="container vh-100 d-flex align-items-center justify-content-center">
+
+    {% block content %}
+        <div class="login-box col-6">
+            <div class="row text-center mb-5">
+                <a href="/"><img src="{% static 'img/Group 7.png' %}"></a>
+            </div>
+            <div class="row">
+                <h4 class="fw-bold primary-dark mb-4 ps-2">ورود به حساب کاربری</h4>
+            </div>
+            <div class="row">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div for="{{ form.username.id_for_label }}">
+                        {{ form.username }}
+                        {% for error in form.username.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                    <div for="{{ form.password.id_for_label }}">
+                        {{ form.password }}
+                        {% for error in form.password.errors %}
+                            <p style="color: red;">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+{#                                <div class="form-row with-icon mt-4 " for="{{ form.captcha.id_for_label }}">#}
+{#                                    {{ form.captcha }}#}
+{#                                    {% for error in form.captcha.errors %}#}
+{#                                        <p style="color: red;">{{ error }}</p>#}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+
+
+                    <div class="mt-4">
+                        <button class="custom-button-9 w-100">
+                            ورود
+                        </button>
+                    </div>
+                    <div class="mt-2">
+                        <div class="row px-2">
+                            <div class="col text-start text-decoration-underline primary-dark">رمز عبور را فراموش کردم.</div>
+                            <a href="{% url 'register' %}" class="col text-end text-decoration-underline primary-light">ثبت نام</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        
+    {% endblock %}
+
+
+    {% include 'shared/_FooterReferences.html' %}
+
+    {% block footer_ref %}
+        <!--if we have another references for any pages we can add here-->
+    {% endblock %}
+</div>
+</body>
+</html>

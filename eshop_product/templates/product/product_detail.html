@@ -1,0 +1,237 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load humanize %}
+{% load mptt_tags %}
+{% load filter_tags %}
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+
+{% block description %}
+    {{ product.description }}
+{% endblock %}
+
+{% block keyword %}
+    {{ product.keyword }}
+{% endblock %}
+
+{% block header_ref %}
+  
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- breadcrumb -->
+    <div class="row mt-4">
+      <div class="col breadcrumb breadcrumb-shop">
+        <nav class="d-flex" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+          <ol class="breadcrumb align-items-center ps-4">
+            <li class="breadcrumb-item"><a href="/">خانه</a></li>
+            {% if product.category.parent.parent.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' product.category.parent.parent.parent.slug %}">
+                  {{ product.category.parent.parent.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if product.category.parent.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' product.category.parent.parent.slug %}">
+                  {{ product.category.parent.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if product.category.parent.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' product.category.parent.slug %}">
+                  {{ product.category.parent }}
+                </a>
+              </li>
+            {% endif %}
+            {% if product.category.status == 'True' %}
+              <li class="breadcrumb-item active" aria-current="page">
+                <a href="{% url 'product_category_list' product.category.slug %}">
+                  {{ product.category }}
+                </a>
+              </li>
+            {% endif %}
+            <li class="breadcrumb-item active" aria-current="page">
+              <a href="#" class="single-bread-title active" aria-current="page">
+                {{ product.title }}
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <!-- product image  -->
+      <div class="col w-50">
+        <div class="product-gallery product_images">
+          <div class="product-carousel owl-carousel">
+              <div class="item">
+                  {% if variant.image_id > 0 %}
+                      <a class="gallery-item" href="{{ variant.image }}"
+                          data-fancybox="gallery1" data-hash="one">
+                          <img class="singleproduct_image" src="{{ variant.image }}" alt="{{ product.title }}">
+                      </a>
+                  {% else %}
+                      <a class="gallery-item" href="{{ product.image.url }}"
+                          data-fancybox="gallery1" data-hash="one">
+                          <img class="singleproduct_image" src="{{ product.image.url }}" alt="{{ product.title }}">
+                      </a>
+                  {% endif %}
+              </div>
+              {% for img in product_gallery %}
+                  <div class="item">
+                      <a class="gallery-item" href="{{ img.image.url }}"
+                          data-fancybox="gallery1" data-hash="{{ img.id }}">
+                          <img class="singleproduct_image" src="{{ img.image.url }}" alt="{{ product.title }}">
+                      </a>
+                  </div>
+              {% endfor %}
+
+          </div>
+          <ul class="product-thumbnails singleproduct_thumbnail justify-content-between">
+              <li class="active">
+                  <a href="#one">
+                      <img class="singleproduct_thumbnail-img" src="{{ product.image.url }}" alt="{{ product.title }}">
+                  </a>
+              </li>
+              {% for img in product_gallery|slice:":3" %}
+                  <li>
+                      <a href="#{{ img.id }}">
+                          <img class="singleproduct_thumbnail-img" src="{{ img.image.url }}" alt="{{ product.title }}">
+                      </a>
+                  </li>
+              {% endfor %}
+
+          </ul>
+      </div>
+      </div>
+            
+
+      <!-- product details -->
+      <div class="col w-50">
+
+          <div class="row mt-5">
+            <h3>{{ product.title }}</h3>
+            {% if product.title_eng %}
+              <h6 class="single-title-en mt-3">{{ product.title_eng }}</h6>
+            {% endif %}
+          </div>
+          <div class="row align-items-center mt-4">
+            <div class="col">
+              <span class="brand-product2">برند:</span>
+              <a href="{{ product.brand.get_absolute_url }}">
+                <span class="brand-product">{{ product.brand }}</span>
+              </a>
+              
+              <span class="brand-product2" style="padding-right: 32px;" >دسته بندی:</span>
+              {% if product.category.status == 'True' %}
+                <a href="{{ product.category.get_absolute_url }}">
+                  <span class="brand-product">{{ product.category }}</span>
+                </a>
+              {% endif %}
+            </div> 
+          </div>
+
+        <div class="row align-items-center mt-4">
+            <div class="singleproduct_rate d-flex align-items-center justify-content-center">
+              <i class="iconly-Star icli"></i>
+              <h6>{{product.get_avg_stars_percent}}</h6>
+            </div> 
+            <div class="singleproduct_vote ms-2">از {{product.product_stars_number}} رای</div> 
+            
+            <div class="comment-icon d-flex align-items-center justify-content-center ms-4">
+              <i class="iconly-Chat icli"></i>
+              <div>{{ product_comments.count }}</div>
+            </div> 
+            {% if product.amount > 0 %}
+              <span class="mojoudi ms-4">موجودی: {{ product.amount }} عدد</span>
+              <span class="engheza d-flex align-items-center justify-content-center ms-4"> تاریخ انقضا: {{ product.expire_date.year }}/{{ product.expire_date.month }} </span> 
+            {% else %}
+              <span class="mojoudi">موجود نیست</span>
+            {% endif %}
+            
+          </div>
+
+            <div class="singleproduct_box">
+              <div class="row align-items-center mb-1">
+                {% if product.amount > 0 %}
+                  <h2 class="singleproduct_price">{{ product.get_product_offer_price|intcomma:False }}</h2>
+                  <h4 class="singleproduct_tooman ms-1">تومان</h4>
+                  {% if product.percent > 0 %}
+                    <h2 class="singleproduct_price2">{{ product.price|intcomma:False }}</h2>
+                    <h4 class="singleproduct_tooman2 ms-1">تومان</h4>
+                    <h4 class="singleproduct-percentage ms-2 fw-bold"> ٪{{ product.percent }} </h4>
+                  {% endif %}
+                {% else %}
+                  <h2 class="singleproduct-namojood">ناموجود</h2>
+                {% endif %}
+              </div>
+                
+              <div class="row mt-4 mb-1">
+                {% if product.amount > 0 %}
+                  <form class="d-flex" method="post" action="{% url 'addToShopCart' id=product.id  variantid=0 %}">
+                    {% csrf_token %}
+                    <button type="submit" class="custom-button-5">
+                      <i class="iconly-Buy icli"></i>
+                      <h5>افزودن به سبد خرید</h5>
+                    </button>
+                    <div class="single-quantity ms-4">
+                      <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                        <h2>-</h2>
+                      </button>
+                      <input min="1" max="{{ rs.product.amount }}" name="quantity"
+                              value="{{ rs.quantity }}"
+                              type="number">
+                      <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                        <h2>+</h2>
+                      </button>
+                    </div>
+                  </form>
+                {% else %}
+                  <span class="row">
+                    <button type="button" class="custom-button-6">
+                      <i class="iconly-Notification icli"></i>
+                      <h5>موجود شد به من اطلاع بده</h5>
+                    </button>
+                  </span>
+                {% endif %}
+              </div>
+                
+              <div class="row single_box_matn ps-3 mt-4">
+                <p>این داروخانه آنلاین زیر مجموعه‌ی داروخانه دکتر ارجمند میباشد و کلیه‌ی محصولات <br>عرضه شده در سایت ،دارای مجوز رسمی از ازمان غذا و دارو میباشد</p>
+              </div>
+            </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <nav>
+        <div class="nav nav-tabs justify-content-center" id="single-tabs-button" role="tablist">
+          <button class="nav-link nav-link2 active" id="nav-desc-tab" data-bs-toggle="tab" data-bs-target="#nav-desc" type="button" role="tab" aria-controls="nav-desc" aria-selected="true">توضیحات محصول</button>
+          <button class="nav-link nav-link2" id="nav-var-tab" data-bs-toggle="tab" data-bs-target="#nav-var" type="button" role="tab" aria-controls="nav-var" aria-selected="false">مشخصات محصول</button>
+          <button class="nav-link nav-link2" id="nav-comment-tab" data-bs-toggle="tab" data-bs-target="#nav-comment" type="button" role="tab" aria-controls="nav-comment" aria-selected="false">نظرات کاربران</button>
+          <button class="nav-link nav-link2" id="nav-products-tab" data-bs-toggle="tab" data-bs-target="#nav-products" type="button" role="tab" aria-controls="nav-products" aria-selected="false">محصولات مشابه</button>
+        </div>
+      </nav>
+      <div class="tab-content" id="single-desc-tabs">
+        <div class="tab-pane fade show active" id="nav-desc" role="tabpanel" aria-labelledby="nav-desc-tab">{{ product.analyze|safe }}</div>
+        <div class="tab-pane fade" id="nav-var" role="tabpanel" aria-labelledby="nav-var-tab">{{ product.details|safe }}</div>
+        <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">...</div>
+        <div class="tab-pane fade" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">...</div>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
+
+{% block footer_ref %}
+
+
+
+{% endblock %}

@@ -1,0 +1,203 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load humanize %}
+
+
+{% block header_ref %}
+    
+{% endblock %}
+
+{% block title %}
+    سبد خرید
+{% endblock %}
+
+{% block description %}
+    سبد خرید شما
+{% endblock %}
+
+{% block keyword %}
+    سبد خرید مشتری
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row justify-content-around align-items-center">
+        <div class="col custom-line-1 mt-4"></div>
+    </div>
+
+    <!-- sabad header -->
+    <div class="row">
+      <div class=" shipping-details align-items-center d-flex justify-content-center">
+
+        <a href="/cart" class="col text-left d-flex align-items-center justify-content-end">
+            <img src="{% static 'img/cart-page-icon.svg' %}" width="40px" height="40px">
+            <h5 class="primary-dark ms-3">سبد خرید</h5>
+        </a>
+
+        <span class="linear-gradient active"></span>
+
+        <div class="text-left d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/address-page-deactive.svg' %}" width="40px" height="40px">
+            <h5 class="light-gray ms-3">اطلاعات ارسال</h5>
+        </div>
+
+        <span class="linear-gradient"></span>
+
+        <div class="col text-left d-flex align-items-center justify-content-start">
+            <img src="{% static 'img/payment-page-deactive.svg' %}" width="40px" height="40px">
+            <h5 class="light-gray ms-3">اطلاعات پرداخت</h5>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row sabad-title">
+      <h6 class="col-3 text-left d-flex align-items-center ps-5">نام محصول</h6>
+      <div class="col-4"></div>
+      <h6 class="col-2 text-left d-flex align-items-center justify-content-center">قیمت محصول</h6>
+      <h6 class="col-1 text-left d-flex align-items-center justify-content-center">تعداد</h6>
+      <h6 class="col-2 text-left d-flex align-items-center justify-content-center">قیمت نهایی</h6>
+    </div>
+
+    {% if shopcart %}
+        {% for rs in shopcart %}
+            <div class="row justify-content-between m-4 py-3 px-2 me-0">
+            <div class="col-5 d-flex align-items-center">
+                <div>
+                <a class="cart-remove" href="{% url 'removeshopcart'  rs.id %}">&times;</a>
+                <a href="{{ rs.product.get_absolute_url }}">
+                    <img src="{{ rs.product.image.url }}" width="128px" height="128px" alt="">
+                </a>
+                </div>
+                <div class="col ms-4 ps-2">
+                <div class="row">
+                    <a href="{{ rs.product.get_absolute_url }}">
+                        <h6>{{ rs.product.title }}</h6>
+                    </a>
+                </div>
+                <div class="row">
+                    <span class="fw-light light-gray mt-2">
+                        {{ rs.product.title_eng }}
+                    </span>
+                </div>
+                <div class="row">
+                    <h6 class="gray mt-2">کد محصول: {{ rs.product.id }}</h6>
+                </div>
+                </div>
+            </div>
+            <div class="col-5 d-flex align-items-center">
+                <div class="col-4 text-center">
+                    {% if not rs.product.percent == 0 %}
+                        <div class="d-flex align-items-center justify-content-center">
+                            <h4 class="gray fw-light text-decoration-line-through me-2">{{rs.product.price|intcomma:False}}</h4>
+                            <h6 class="cart-percent fw-bold">٪{{rs.product.percent}}</h6>
+                        </div>
+                    {% endif %}
+                        <h3 class="d-flex align-items-center justify-content-center">
+                            {{ rs.product.get_product_offer_price|intcomma:False }} 
+                            <span class="cart-tooman ms-2">تومان</span>
+                        </h3>
+                    
+                </div>
+                <div class="col-4 d-flex text-center justify-content-center">
+                    <form method="post" action="{% url 'addToShopCart' id=rs.product.id  variantid=0 %}">
+                    {% csrf_token %}
+                        <div class="cart-quantity">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                <h5>-</h5>
+                            </button>
+                            <input min="1" max="{{ rs.product.amount }}" name="quantity"
+                                    value="{{ rs.quantity }}"
+                                    type="number">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                <h5>+</h5>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-4 text-center">
+                    <h3 class="d-flex align-items-center justify-content-center primary-light">{{ rs.amount|intcomma:False }} <span class="cart-tooman ms-2">تومان</span></h3>
+                </div>
+            </div>
+            </div>
+            {% if not forloop.last %}
+            <div class="row justify-content-around align-items-center">
+                <div class="col shipping-cart-divider"></div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <h3>سبد خرید شما خالیست</h3>
+    {% endif %}
+    
+    <div class="row cart-bottom-box">
+
+      <div class="col-8 mt-4 ps-3">
+        <div class="row">
+          <h6 class="fw-light">افزودن کالا به سبد خرید به معنی رزرو آن نیست ، با توجه به محدودیت موجودی سبد خود را ثبت و خرید را تکمیل کنید.</h6>
+        </div>
+        <div class="row align-items-center mt-4">
+            <form class="width-fit" method="post" action="">
+                {% csrf_token %}
+                <div for="{{ coupon_form.coupon_code.id_for_label }}">
+                    {{ coupon_form.coupon_code }}
+                    {% for error in coupon_form.coupon_code.errors %}
+                        <p style="color: red;">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </form>
+            {% if discount.value > 0 %}
+                <h6 class="width-fit primary-light ms-3">کد تخفیف {{ discount.value }} درصدی</h6>
+            {% endif %}
+            
+        </div>
+      </div>
+      <!-- divider  -->
+      <span class="cart-h-divider"></span>
+
+      <div class="col mt-4 mb-4 ms-5 me-3 pe-3">
+        
+        <div class="row d-flex justify-content-around align-items-center">
+          <h6 class="col-7 fw-light">مجموع قیمت:</h6>
+          <h6 class="col text-end primary-dark">{{ totalPrice|intcomma:False }}<span class="cart-tooman ms-2">تومان</span></h6>
+        </div>
+
+        <div class="row d-flex justify-content-around align-items-center mt-2 mb-3">
+          <h6 class="col-7 fw-light">مجموع سود از این خرید:</h6>
+          <h6 class="col text-end primary-light">{{ totalTakhfif|intcomma:False }}<span class="cart-tooman ms-2">تومان</span></h6>
+        </div>
+
+        <div class="row d-flex justify-content-around align-items-center">
+          <h6 class="col-7">مبلغ قابل پرداخت:</h6>
+          <h4 class="col text-end">{{ totalPrice_takhfif_withCoupon|intcomma:False }}<span class="cart-tooman ms-2">تومان</span></h4>
+
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="row mt-4" style="margin-bottom: 340px;">
+
+      <div class="d-flex me-4 pre-footer-cart">
+        <p>این داروخانه آنلاین زیر مجموعه‌ی داروخانه‌ی دکتر ارجمند می باشد و کلیه‌ی محصولات عرضه شده در سایت ، دارای مجوز رسمی از سازمان غذا و دارو می باشد. </p>
+      </div>
+      <form class="width-fit" method="post" action="">
+        {% csrf_token %}
+        <a class="width-fit" href="/shipping">
+            <button type="submit" class="cart-button">
+                <h5>ثبت و مرحله بعد</h5>
+            </button>
+        </a>
+      </form>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block footer_ref %}
+{% endblock %}
